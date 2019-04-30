@@ -1,0 +1,31 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Areas.EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="row">
+    <div class="col-sm-9">
+        <h4>@Localizer["Area"]</h4>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Area.ID" />
+            <div class="form-group">
+                <label asp-for="Area.Name" class="control-label">@Localizer["Name"]</label>
+                <input asp-for="Area.Name" class="form-control" />
+                <span asp-validation-for="Area.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBack" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+    </div>
+</div>
+@section Scripts {
+    <script>
+    </script>
+}
+

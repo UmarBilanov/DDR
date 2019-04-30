@@ -1,0 +1,159 @@
+﻿@page
+@model DailyReportModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System
+@inject IViewLocalizer Localizer
+@{
+    var CurrentQuery = Request.QueryString;
+    string query = Convert.ToString(CurrentQuery);
+    var result = "en";
+    var VarQuery = query.Length;
+    if (VarQuery != 0)
+    {
+        result = query.Substring(VarQuery - 2);
+    }
+
+}
+@section Scripts
+    {
+    <script type="text/javascript">
+
+        $("#btnQueryStringBackToHomeIndex").bind("click", function () {
+            var QueryStringLength = window.location.search.length;
+            if (QueryStringLength >= 10) {
+                var url = "/?" + window.location.search.substring(window.location.search.length - 10, window.location.search.length);
+                window.location.href = url;
+            } else {
+                var url = "/";
+                window.location.href = url;
+            }
+        });
+
+        $(document).ready(function (e) {
+            var now = new Date();
+
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+            $('#TodayDate').val(today);
+            
+        });
+
+
+    </script>
+}
+<hr />
+<div class="container">
+    <form method="get">
+        <div class="col-sm-9 report-date">
+            <div class="report-date">
+                <div class="col-sm-12">
+                    <div class="col-sm-2">
+                        <label for="ReportDate">@Localizer["REPORT DATE"]</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input asp-for="ReportDate" type="date" id="TodayDate" value="@DateTime.Now.ToString();" class="form-control report-date__input">
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="submit" value="Filter" id="submit" class="btn btn-block">@Localizer["REPORT"]</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <input asp-for="culture" type="hidden" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3 tabs">
+            <button type="button" id="btnQueryStringBackToHomeIndex" class="btn btn-block">@Localizer["BACK"]</button><br />
+        </div>
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <table class="table table-bordered my-table">
+                    <thead>
+                        <tr class="active">
+                            <th>@Localizer["Drill Program"]</th>
+                            <th>@Localizer["Drill"]</th>
+                            <th>@Localizer["Hole"]</th>
+                            <th>@Localizer["Bench"]</th>
+                            <th>@Localizer["Area"]</th>
+                            <th>@Localizer["D/S"]</th>
+                            <th>@Localizer["N/S"]</th>
+                            <th>@Localizer["Total"]</th>
+                            <th>@Localizer["Casing"]</th>
+                            <th>@Localizer["Project Depth"]</th>
+                            <th>@Localizer["Comment"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item0 in Model.DrillProgram)
+                        {
+                            <tr class="active">
+                                <td colspan="11">@Html.DisplayFor(modelItem => item0.Name)</td>
+                                @*<td>
+                                    <strong>
+                                        @(
+                                                            @Model.CreateDailyReport
+                                                            .Where(w => w.Hole.DrillProgram.Name == item0.Name).Sum(i => i.HoleDepthToNight)
+                                        )
+                                    </strong>
+                                </td>
+                                <td colspan="3"></td>*@
+                            </tr>
+                            @foreach (var item in Model.CreateDailyReport)
+                            {
+                                @if (item0.Name == item.Hole.DrillProgram.Name)
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td>@Html.DisplayFor(modelItem => item.Hole.Drill.DrillCode)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Hole.HoleCode)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Hole.Bench)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Hole.HoleZone.Area.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.MetersDrilledDay)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.MetersDrilledNight)</td>
+                                        <td>
+                                            <strong>
+                                                @(@item.MetersDrilledDay + @item.MetersDrilledNight)
+                                            </strong>
+                                        </td>
+                                        <td>@Html.DisplayFor(modelItem => item.CasingToNight)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Hole.HoleDepth)</td>
+                                        <td>
+                                            @if (item.CommentDay != null)
+                                            {<strong>D/S</strong>
+                                                @Html.DisplayFor(modelItem => item.CommentDay)
+                                                ;
+                                            }
+                                            @if (item.CommentNight != null)
+                                            {<strong>N/S</strong>
+                                                @Html.DisplayFor(modelItem => item.CommentNight)
+                                                ;
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                        <tr class="active">
+                            <td colspan="7">
+                                <strong>
+                                    @Localizer["GENERAL TOTAL"]
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    @(
+                                        @Model.CreateDailyReport.Sum(i => i.MetersDrilledDay + i.MetersDrilledNight)
+                                      )
+                                </strong>
+                            </td>
+                            <td colspan="3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,178 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Holes.IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@section Scripts
+    {
+    <script type="text/javascript">
+        // Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+        // for details on configuring this project to bundle and minify static web assets.
+        var apiBaseUrl = document.location.origin;
+        // Write your Javascript code.
+
+        $(function () {
+            $("#btnQueryStringHoleZone").bind("click", function () {
+                var url = "/HoleZones/Index" + window.location.search;
+                window.location.href = url;
+            });
+
+            $("#btnQueryStringArea").bind("click", function () {
+                var url = "/Areas/Index" + window.location.search;
+                window.location.href = url;
+            });
+
+            $("#btnQueryStringDrillProgram").bind("click", function () {
+                var url = "/DrillPrograms/Index" + window.location.search;
+                window.location.href = url;
+            });
+
+            $("#btnQueryStringCreateNewHole").bind("click", function () {
+                var url = "/Holes/create" + window.location.search;
+                window.location.href = url;
+            });
+        });
+
+        $("#HoleZoneID").bind('change', function () {
+            var HoleZoneID = this.value;
+            if (HoleZoneID == null)
+                return;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("HoleArea").innerHTML = this.responseText
+                    document.getElementById("HoleArea").value = $('#DetailsArea')[0].outerText;
+
+                }
+            };
+            xhttp.open("GET", apiBaseUrl + "/HoleZones/Details?id=" + HoleZoneID, true);
+            xhttp.send();
+
+        });
+        $("#HoleZoneID").trigger('change');
+
+        $('a.QueryStringEdit').each(function () {
+            var url = $(this).attr('href');
+            if (url != "") {
+                $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+            }
+        });
+
+        $('a.QueryStringDelete').each(function () {
+            var url = $(this).attr('href');
+            if (url != "") {
+                $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+            }
+        });
+
+    </script>
+}
+<hr />
+<div class="container">
+    <div class="col-sm-10">
+        <div id="exTab2">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a id="QueryStringEmployee">@Localizer["EMPLOYEE"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringCrew">@Localizer["CREW"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringDrill">@Localizer["DRILL"]</a>
+                </li>
+                <li class="active">
+                    <a id="QueryStringHole">@Localizer["HOLE"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringEquipment">@Localizer["EQUIPMENT"]</a>
+                </li>
+            </ul>
+
+            <div class="tab-content ">
+                <div class="tab-pane active" id="hole">
+                    <br />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Hole[0].HoleCode)
+                                </th>
+                                <th>
+                                    @Localizer["HOLE ZONE"]
+                                </th>
+                                <th>
+                                    @Localizer["DRILL"]
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Hole[0].HoleDepth)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Hole[0].Azimut)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Hole[0].Dip)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Hole[0].Section)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Hole[0].ZeroDatum)
+                                </th>
+                                <th>
+                                    @Localizer["STATUS"]
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Hole)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HoleCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HoleZone.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Drill.DrillCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HoleDepth)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Azimut)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Dip)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Section)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ZeroDatum)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HoleStatus.Name)
+                                    </td>
+                                    <td>
+                                        <a class="QueryStringEdit" asp-page="./Edit" asp-route-id="@item.ID">@Localizer["Edit"]</a> |
+                                        <a class="QueryStringDelete" asp-page="./Delete" asp-route-id="@item.ID">@Localizer["Delete"]</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <button type="button" id="btnQueryStringBackToHome" class="btn btn-block">@Localizer["BACK"]</button><br/>
+        <button type="button" id="btnQueryStringHoleZone" class="btn btn-block">@Localizer["HOLE ZONE"]</button><br/>
+        <button type="button" id="btnQueryStringArea" class="btn btn-block">@Localizer["AREA"]</button><br/>
+        <button type="button" id="btnQueryStringDrillProgram" class="btn btn-block" style="font-size: 13px">@Localizer["DRILL PROGRAM"]</button><br/><br/>
+        <button type="button" id="btnQueryStringCreateNewHole" class="btn btn-block">@Localizer["CREATE NEW"]</button><br />
+    </div>
+</div>

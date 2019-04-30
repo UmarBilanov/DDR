@@ -1,0 +1,328 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Crews.EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="row">
+    <div class="col-sm-9">
+        <h4>@Localizer["CREW"]</h4>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Crew.ID" />
+            <div class="form-row">
+                <div class="form-group col-sm-2">
+                    <label asp-for="Crew.CrewName">@Localizer["CREW CODE"]</label>
+                    <input asp-for="Crew.CrewName" type="text" class="form-control">
+                    <span asp-validation-for="Crew.CrewName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-sm-10">
+                    <div class="panel panel-default">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="active">
+                                    <th></th>
+                                    <th>@Localizer["SHORTNAME"]</th>
+                                    <th>@Localizer["NAME"]</th>
+                                    <th>@Localizer["SURNAME"]</th>
+                                    <th>@Localizer["FULLNAME"]</th>
+                                    <th>@Localizer["POSITION"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="active">@Localizer["OPERATOR"]</td>
+                                    <td class="active">
+                                        <select asp-for="Crew.EmployeeID" class="form-control update-select crewHide" id="OperatorID" asp-items="ViewBag.EmployeeID"></select>
+                                        <span asp-validation-for="Crew.EmployeeID" class="text-danger"></span>
+                                    </td>
+                                    <td class="active" id="Name"></td>
+                                    <td class="active" id="Surname"></td>
+                                    <td class="active" id="Fullname"></td>
+                                    <td class="active" id="Position"></td>
+                                </tr>
+                                <tr>
+                                    <td class="active">@Localizer["HELPER 1"]</td>
+                                    <td class="active">
+                                        <select asp-for="Crew.Helper1ID" class="form-control update-select crewHide" id="Helper1ID" asp-items="ViewBag.Helper1ID"></select>
+                                        <span asp-validation-for="Crew.Helper1ID" class="text-danger"></span>
+                                    </td>
+                                    <td class="active" id="Helper1Name"></td>
+                                    <td class="active" id="Helper1Surname"></td>
+                                    <td class="active" id="Helper1Fullname"></td>
+                                    <td class="active" id="Helper1Position"></td>
+                                </tr>
+                                <tr>
+                                    <td class="active">@Localizer["HELPER 2"]</td>
+                                    <td class="active">
+                                        <select asp-for="Crew.Helper2ID" class="form-control update-select crewHide" id="Helper2ID" asp-items="ViewBag.Helper2ID"></select>
+                                        <span asp-validation-for="Crew.Helper2ID" class="text-danger"></span>
+                                    </td>
+                                    <td class="active" id="Helper2Name"></td>
+                                    <td class="active" id="Helper2Surname"></td>
+                                    <td class="active" id="Helper2Fullname"></td>
+                                    <td class="active" id="Helper2Position"></td>
+                                </tr>
+                                <tr>
+                                    <td class="active">@Localizer["HELPER 3"]</td>
+                                    <td class="active">
+                                        <select asp-for="Crew.Helper3ID" class="form-control update-select crewHide" id="Helper3ID" asp-items="ViewBag.Helper3ID"></select>
+                                    </td>
+                                    <td class="active" id="Helper3Name"></td>
+                                    <td class="active" id="Helper3Surname"></td>
+                                    <td class="active" id="Helper3Fullname"></td>
+                                    <td class="active" id="Helper3Position"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-9">
+                </div>
+                <div class="col-sm-3">
+                    <button type="submit" value="Create" class="btn btn-block">@Localizer["SAVE"]</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBack" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+    </div>
+</div>
+@section Scripts {
+    <script>
+        var apiBaseUrl = document.location.origin;
+
+        $("#OperatorID").bind('change',
+            function () {
+                var OperatorID = this.value;
+                if (OperatorID == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("Name").innerHTML = this.responseText
+                        document.getElementById("Name").innerHTML = $('#DetailsName')[0].outerText;
+
+                        document.getElementById("Surname").innerHTML = this.responseText
+                        document.getElementById("Surname").innerHTML = $('#DetailsSurname')[0].outerText;
+
+                        document.getElementById("Fullname").innerHTML = this.responseText
+                        document.getElementById("Fullname").innerHTML = $('#DetailsFullname')[0].outerText;
+
+                        document.getElementById("Position").innerHTML = this.responseText
+                        document.getElementById("Position").innerHTML = $('#DetailsPosition')[0].outerText;
+
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + OperatorID, true);
+                xhttp.send();
+
+            });
+        $("#OperatorID").trigger('change');
+
+        $("#Helper1ID").bind('change',
+            function () {
+                var Helper1ID = this.value;
+                if (Helper1ID == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("Helper1Name").innerHTML = this.responseText
+                        document.getElementById("Helper1Name").innerHTML = $('#DetailsName')[0].outerText;
+
+                        document.getElementById("Helper1Surname").innerHTML = this.responseText
+                        document.getElementById("Helper1Surname").innerHTML = $('#DetailsSurname')[0].outerText;
+
+                        document.getElementById("Helper1Fullname").innerHTML = this.responseText
+                        document.getElementById("Helper1Fullname").innerHTML = $('#DetailsFullname')[0].outerText;
+
+                        document.getElementById("Helper1Position").innerHTML = this.responseText
+                        document.getElementById("Helper1Position").innerHTML = $('#DetailsPosition')[0].outerText;
+
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper1ID, true);
+                xhttp.send();
+
+            });
+        $("#Helper1ID").trigger('change');
+
+        $("#Helper2ID").bind('change',
+            function () {
+                var Helper2ID = this.value;
+                if (Helper2ID == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("Helper2Name").innerHTML = this.responseText
+                        document.getElementById("Helper2Name").innerHTML = $('#DetailsName')[0].outerText;
+
+                        document.getElementById("Helper2Surname").innerHTML = this.responseText
+                        document.getElementById("Helper2Surname").innerHTML = $('#DetailsSurname')[0].outerText;
+
+                        document.getElementById("Helper2Fullname").innerHTML = this.responseText
+                        document.getElementById("Helper2Fullname").innerHTML = $('#DetailsFullname')[0].outerText;
+
+                        document.getElementById("Helper2Position").innerHTML = this.responseText
+                        document.getElementById("Helper2Position").innerHTML = $('#DetailsPosition')[0].outerText;
+
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper2ID, true);
+                xhttp.send();
+
+            });
+        $("#Helper2ID").trigger('change');
+
+        $("#Helper3ID").bind('change',
+            function () {
+                var Helper3ID = this.value;
+                if (Helper3ID == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("Helper3Name").innerHTML = this.responseText
+                        document.getElementById("Helper3Name").innerHTML = $('#DetailsName')[0].outerText;
+
+                        document.getElementById("Helper3Surname").innerHTML = this.responseText
+                        document.getElementById("Helper3Surname").innerHTML = $('#DetailsSurname')[0].outerText;
+
+                        document.getElementById("Helper3Fullname").innerHTML = this.responseText
+                        document.getElementById("Helper3Fullname").innerHTML = $('#DetailsFullname')[0].outerText;
+
+                        document.getElementById("Helper3Position").innerHTML = this.responseText
+                        document.getElementById("Helper3Position").innerHTML = $('#DetailsPosition')[0].outerText;
+
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper3ID, true);
+                xhttp.send();
+
+            });
+        $("#Helper3ID").trigger('change');
+
+        $("#CrewIDDay").bind('change',
+            function () {
+                var CrewID = this.value;
+                if (CrewID == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("DayOperator").innerHTML = this.responseText
+                        document.getElementById("DayOperator").innerHTML = $('#DetailsOperator')[0].outerText;
+
+                        document.getElementById("DayHelper1").innerHTML = this.responseText
+                        document.getElementById("DayHelper1").innerHTML = $('#DetailsHelper1')[0].outerText;
+
+                        document.getElementById("DayHelper2").innerHTML = this.responseText
+                        document.getElementById("DayHelper2").innerHTML = $('#DetailsHelper2')[0].outerText;
+
+                        document.getElementById("DayHelper3").innerHTML = this.responseText
+                        document.getElementById("DayHelper3").innerHTML = $('#DetailsHelper3')[0].outerText;
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Crews/Details?id=" + CrewID, true);
+                xhttp.send();
+
+
+                var Operator = $('#DayOperator')[0].outerText;;
+                if (Operator == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        document.getElementById("DayOperatorName").innerHTML = this.responseText
+                        document.getElementById("DayOperatorName").innerHTML = $('#DetailsFullname')[0].outerText;
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Operator, true);
+                xhttp.send();
+
+                var Helper1 = $('#DayHelper1')[0].outerText;;
+                if (Helper1 == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        document.getElementById("DayHelper1Name").innerHTML = this.responseText
+                        document.getElementById("DayHelper1Name").innerHTML = $('#DetailsFullname')[0].outerText;
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper1, true);
+                xhttp.send();
+
+                var Helper2 = $('#DayHelper2')[0].outerText;;
+                if (Helper2 == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        document.getElementById("DayHelper2Name").innerHTML = this.responseText
+                        document.getElementById("DayHelper2Name").innerHTML = $('#DetailsFullname')[0].outerText;
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper2, true);
+                xhttp.send();
+
+                var Helper3 = $('#DayHelper3')[0].outerText;;
+                if (Helper3 == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        document.getElementById("DayHelper3Name").innerHTML = this.responseText
+                        document.getElementById("DayHelper3Name").innerHTML = $('#DetailsFullname')[0].outerText;
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper3, true);
+                xhttp.send();
+
+            });
+
+        $(document).ready(function () {
+
+            function intializeSelect() {
+                // this "initializes the boxes"
+                $('.update-select').each(function (box) {
+                    $('.crewHide').find('option:contains(" .  . Null                                              ")').hide();
+                    var value = $('.update-select')[box].value;
+                    if (value) {
+                        $('.update-select').not(this).find('option[value="' + value + '"]').hide();
+                    }
+                });
+            };
+
+            intializeSelect();
+
+            // this is called every time a select box changes
+            $('.update-select').on('change', function (event) {
+                $('.update-select').find('option').show();
+                intializeSelect();
+            });
+
+
+        });
+    </script>
+}

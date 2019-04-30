@@ -1,0 +1,55 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Drills.EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="row">
+    <div class="col-sm-9">
+        <h4>@Localizer["DRILL"]</h4>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Drill.ID" />
+            <div class="form-group">
+                <label asp-for="Drill.DrillCode" class="control-label"></label>
+                <input asp-for="Drill.DrillCode" class="form-control" />
+                <span asp-validation-for="Drill.DrillCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Drill.DrillNum" class="control-label"></label>
+                <input asp-for="Drill.DrillNum" class="form-control" />
+                <span asp-validation-for="Drill.DrillNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Drill.DrillColour" class="control-label"></label>
+                <input asp-for="Drill.DrillColour" class="form-control" />
+                <span asp-validation-for="Drill.DrillColour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Drill.Modification" class="control-label"></label>
+                <input asp-for="Drill.Modification" class="form-control" />
+                <span asp-validation-for="Drill.Modification" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Drill.DrillName" class="control-label"></label>
+                <input asp-for="Drill.DrillName" class="form-control" />
+                <span asp-validation-for="Drill.DrillName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Drill.Depth" class="control-label"></label>
+                <input asp-for="Drill.Depth" class="form-control" />
+                <span asp-validation-for="Drill.Depth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Save"]" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBack" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+    </div>
+</div>
+@section Scripts {
+    <script>
+    </script>
+}

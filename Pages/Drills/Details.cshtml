@@ -1,0 +1,50 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Drills.DetailsModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<div>
+    <h4>@Localizer["Drill"]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Drill.DrillCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Drill.DrillCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Drill.DrillNum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Drill.DrillNum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Drill.DrillColour)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Drill.DrillColour)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Drill.Modification)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Drill.Modification)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Drill.DrillName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Drill.DrillName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Drill.Depth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Drill.Depth)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Drill.ID">@Localizer["Edit"]</a> |
+    <a asp-page="./Index">@Localizer["Back to List"]</a>
+</div>

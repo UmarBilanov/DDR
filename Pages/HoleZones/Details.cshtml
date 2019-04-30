@@ -1,0 +1,26 @@
+﻿@page
+@model DiamondDrillingReport.Pages.HoleZones.DetailsModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<div>
+    <h4>@Localizer["HoleZone"]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HoleZone.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HoleZone.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HoleZone.Area)
+        </dt>
+        <dd id="DetailsArea">
+            @Html.DisplayFor(model => model.HoleZone.Area.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.HoleZone.ID">@Localizer["Edit"]</a> |
+    <a asp-page="./Index">@Localizer["Back to List"]</a>
+</div>

@@ -1,0 +1,51 @@
+﻿@page
+@model IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = "Home page";
+}
+<hr />
+<div class="container">
+    <div class="col-sm-9">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <img src="~/images/kumtor.jpg" alt="ASP.NET" class="img-responsive" style="width:100%" />
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringCreateDailyReport" class="btn btn-block">@Localizer["Create Daily Report"]</button><br />
+        <button type="button" id="btnQueryStringEditDailyReport" class="btn btn-block">@Localizer["Edit Daily Report"]</button><br />
+        <button type="button" id="btnQueryStringReferences" class="btn btn-block">@Localizer["References"]</button><br />
+        <button type="button" id="btnQueryStringDailyReport" class="btn btn-block">@Localizer["Daily Report"]</button><br />
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(function () {
+            $("#btnQueryStringCreateDailyReport").bind("click", function () {
+                var url = "/CreateDailyReports/Create" + window.location.search;
+                window.location.href = url;
+            });
+
+            $("#btnQueryStringEditDailyReport").bind("click", function () {
+                var url = "/CreateDailyReports/Index" + window.location.search;
+                window.location.href = url;
+            });
+
+            $("#btnQueryStringReferences").bind("click", function () {
+                var url = "/Holes" + window.location.search;
+                window.location.href = url;
+            });
+
+            $("#btnQueryStringDailyReport").bind("click", function () {
+                var url = "/DailyReport" + window.location.search;
+                window.location.href = url;
+            });
+        });
+
+    </script>
+}

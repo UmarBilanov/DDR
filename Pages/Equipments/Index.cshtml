@@ -1,0 +1,106 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Equipments.IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+<hr />
+<div class="container">
+    <div class="col-sm-9">
+        <div id="exTab2">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a id="QueryStringEmployee">@Localizer["EMPLOYEE"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringCrew">@Localizer["CREW"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringDrill">@Localizer["DRILL"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringHole">@Localizer["HOLE"]</a>
+                </li>
+                <li class="active">
+                    <a id="QueryStringEquipment">@Localizer["EQUIPMENT"]</a>
+                </li>
+            </ul>
+            <br/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Equipment[0].AssetCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Equipment[0].WatertruckName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Equipment[0].HullNumber)
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Equipment)
+                    {
+                        if (item.ID == 16)
+                        {
+                            <tr></tr>   
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AssetCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.WatertruckName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HullNumber)
+                                </td>
+                                <td>
+                                    <a class="QueryStringEdit" asp-page="./Edit" asp-route-id="@item.ID">@Localizer["Edit"]</a> |
+                                    <a class="QueryStringDelete" asp-page="./Delete" asp-route-id="@item.ID">@Localizer["Delete"]</a>
+                                </td>
+                            </tr>
+                        }
+                        
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBackToHome" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+        <button type="button" id="btnQueryStringCreateNewEquipment" class="btn btn-block">@Localizer["CREATE NEW"]</button><br />
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+            $('a.QueryStringEdit').each(function () {
+                var url = $(this).attr('href');
+                if (url != "") {
+                    $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+                }
+            });
+
+            $('a.QueryStringDelete').each(function () {
+                var url = $(this).attr('href');
+                if (url != "") {
+                    $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+                }
+            });
+
+            $("#btnQueryStringCreateNewEquipment").bind("click", function () {
+                var url = "/Equipments/create" + window.location.search;
+                window.location.href = url;
+            });
+        });
+
+    </script>
+}

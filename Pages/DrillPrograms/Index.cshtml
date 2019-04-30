@@ -1,0 +1,61 @@
+﻿@page
+@model DiamondDrillingReport.Pages.DrillPrograms.IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="container">
+    <div class="col-sm-9">
+        <h4>@Localizer["DRILL PROGRAM"]</h4>
+        <hr />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Localizer["NAME"]
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.DrillProgram)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <a class="QueryStringEdit" asp-page="./Edit" asp-route-id="@item.ID">@Localizer["Edit"] </a> |
+                            <a class="QueryStringDelete" asp-page="./Delete" asp-route-id="@item.ID">@Localizer["Delete"]</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBackToHoles" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+        <button type="button" id="btnQueryStringCreate" class="btn btn-block">@Localizer["CREATE NEW"]</button>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $('a.QueryStringEdit').each(function () {
+            var url = $(this).attr('href');
+            if (url != "") {
+                $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+            }
+        });
+
+        $('a.QueryStringDelete').each(function () {
+            var url = $(this).attr('href');
+            if (url != "") {
+                $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+            }
+        });
+
+        $("#btnQueryStringCreate").bind("click", function () {
+            var url = "/DrillPrograms/Create" + window.location.search;
+            window.location.href = url;
+        });
+    </script>
+}

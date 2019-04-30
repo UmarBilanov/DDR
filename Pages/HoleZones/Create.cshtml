@@ -1,0 +1,33 @@
+﻿@page
+@model DiamondDrillingReport.Pages.HoleZones.CreateModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="row">
+    <div class="col-sm-9">
+        <h4>@Localizer["HoleZone"]</h4>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HoleZone.Name" class="control-label"></label>
+                <input asp-for="HoleZone.Name" class="form-control" />
+                <span asp-validation-for="HoleZone.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoleZone.AreaID" class="control-label"></label>
+                <select asp-for="HoleZone.AreaID" class="form-control" asp-items="ViewBag.AreaID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["Create"]" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBack" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+    </div>
+</div>
+@section Scripts {
+    <script>
+    </script>
+}

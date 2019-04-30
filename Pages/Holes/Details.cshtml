@@ -1,0 +1,122 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Holes.DetailsModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<div>
+    <h4>@Localizer["Hole"]</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.HoleCode)
+        </dt>
+        <dd id="DetailsHoleCode">
+            @Html.DisplayFor(model => model.Hole.HoleCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.ProjectCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.ProjectCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.HoleZone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.HoleZone.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.Drill)
+        </dt>
+        <dd id="DetailsDrill">
+            @Html.DisplayFor(model => model.Hole.Drill.DrillCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.DrillProgram)
+        </dt>
+        <dd id="DetailsDrillProgram">
+            @Html.DisplayFor(model => model.Hole.DrillProgram.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.HoleDepth)
+        </dt>
+        <dd id="DetailsHoleDepth">
+            @Html.DisplayFor(model => model.Hole.HoleDepth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.Azimut)
+        </dt>
+        <dd id="DetailsAz">
+            @Html.DisplayFor(model => model.Hole.Azimut)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.Dip)
+        </dt>
+        <dd id="DetailsDip">
+            @Html.DisplayFor(model => model.Hole.Dip)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.Section)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.Section)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.ZeroDatum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.ZeroDatum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.HoleStartDate)
+        </dt>
+        <dd id="DetailsStartDate">
+            @Html.DisplayFor(model => model.Hole.HoleStartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.HoleStatus)
+        </dt>
+        <dd id="DetailsStatus">
+            @Html.DisplayFor(model => model.Hole.HoleStatus.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.ProjectCoordinatesX)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.ProjectCoordinatesX)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.ProjectCoordinatesY)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.ProjectCoordinatesY)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.ProjectCoordinatesZ)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.ProjectCoordinatesZ)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.ActualCoordinateX)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.ActualCoordinateX)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.ActualCoordinateY)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.ActualCoordinateY)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hole.ActualCoordinateZ)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hole.ActualCoordinateZ)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Hole.ID">@Localizer["Edit"]</a> |
+    <a asp-page="./Index">@Localizer["Back to List"]</a>
+</div>

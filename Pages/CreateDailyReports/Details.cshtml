@@ -1,0 +1,505 @@
+﻿@*@page
+    @model DiamondDrillingReport.Pages.CreateDailyReports.DetailsModel
+
+    <div>
+        <h4>CreateDailyReport</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.Date)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.Date)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.Hole)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.Hole.ID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.Equipment)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.Equipment.ID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.Equipment)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.Equipment.ID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.BitsDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.BitsDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.BitsNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.BitsNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.ShellDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.ShellDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.ShellNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.ShellNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.HoleDepthToDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.HoleDepthToDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.HoleDepthToNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.HoleDepthToNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.CasingFromDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.CasingFromDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.CasingFromNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.CasingFromNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.CasingToDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.CasingToDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.CasingToNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.CasingToNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.PreStartDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.PreStartDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.PreStartNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.PreStartNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.ConditionDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.ConditionDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.ConditionNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.ConditionNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.DrillingDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.DrillingDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.DrillingNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.DrillingNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.ReamingDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.ReamingDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.ReamingNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.ReamingNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.ReamingCasingDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.ReamingCasingDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.ReamingCasingNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.ReamingCasingNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.BitChangeDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.BitChangeDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.BitChangeNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.BitChangeNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.RepairsDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.RepairsDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.RepairsNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.RepairsNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.BlastDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.BlastDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.BlastNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.BlastNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.WaterDelayDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.WaterDelayDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.WaterDelayNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.WaterDelayNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.AwaitingPartsMaterialsDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.AwaitingPartsMaterialsDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.AwaitingPartsMaterialsNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.AwaitingPartsMaterialsNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.AwaitingMechanicElectricianDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.AwaitingMechanicElectricianDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.AwaitingMechanicElectricianNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.AwaitingMechanicElectricianNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.AwaitingDozerDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.AwaitingDozerDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.AwaitingDozerNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.AwaitingDozerNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.PreparationDrillingDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.PreparationDrillingDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.PreparationDrillingNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.PreparationDrillingNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.DismantlingDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.DismantlingDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.DismantlingNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.DismantlingNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.MovingRigDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.MovingRigDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.MovingRigNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.MovingRigNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestsDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestsDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestsNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestsNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.AwaitingDrillCrewDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.AwaitingDrillCrewDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.AwaitingDrillCrewNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.AwaitingDrillCrewNight)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayDepth)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayDepth)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayDIP)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayDIP)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayAZ)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayAZ)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayMAG)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayMAG)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayDepth2)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayDepth2)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayDIP2)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayDIP2)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayAZ2)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayAZ2)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayMAG2)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayMAG2)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayDepth3)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayDepth3)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayDIP3)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayDIP3)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayAZ3)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayAZ3)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayMAG3)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayMAG3)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayDepth4)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayDepth4)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayDIP4)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayDIP4)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayAZ4)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayAZ4)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestDayMAG4)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestDayMAG4)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightDepth)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightDepth)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightDIP)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightDIP)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightAZ)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightAZ)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightMAG)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightMAG)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightDepth2)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightDepth2)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightDIP2)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightDIP2)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightAZ2)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightAZ2)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightMAG2)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightMAG2)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightDepth3)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightDepth3)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightDIP3)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightDIP3)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightAZ3)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightAZ3)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightMAG3)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightMAG3)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightDepth4)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightDepth4)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightDIP4)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightDIP4)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightAZ4)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightAZ4)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.TestNightMAG4)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.TestNightMAG4)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.CommentDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.CommentDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDailyReport.CommentNight)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateDailyReport.CommentNight)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.CreateDailyReport.ID">Edit</a> |
+        <a asp-page="./Index">Back to List</a>
+    </div>*@

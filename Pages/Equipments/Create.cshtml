@@ -1,0 +1,65 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Equipments.CreateModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="row">
+    <div class="col-sm-9">
+        <h4>@Localizer["EQUIPMENT"]</h4>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Equipment.AssetCode"></label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Equipment.AssetCode" type="text" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Equipment.AssetCode" class="text-danger">@ViewData["Message"]</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Equipment.WatertruckName"></label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Equipment.WatertruckName" type="text" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Equipment.WatertruckName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Equipment.HullNumber"></label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Equipment.HullNumber" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Equipment.HullNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-4">
+                    <input type="submit" value="@Localizer["CREATE"]" class="btn btn-block" />
+                </div>
+                <div class="form-group col-sm-2"></div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBack" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+    </div>
+</div>
+@section Scripts {
+    <script>
+    </script>
+}

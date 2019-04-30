@@ -1,0 +1,65 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Drills.DeleteModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="row">
+    <div class="col-sm-9">
+        <h3>@Localizer["Are you sure you want to delete this?"]</h3>
+        <div>
+            <h4>@Localizer["Drill"]</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Drill.DrillCode)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Drill.DrillCode)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Drill.DrillNum)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Drill.DrillNum)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Drill.DrillColour)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Drill.DrillColour)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Drill.Modification)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Drill.Modification)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Drill.DrillName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Drill.DrillName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Drill.Depth)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Drill.Depth)
+                </dd>
+            </dl>
+
+            <form method="post">
+                <input type="hidden" asp-for="Drill.ID" />
+                <input type="submit" value="@Localizer["Delete"]" class="btn btn-default" />
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBack" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+    </div>
+</div>
+@section Scripts {
+    <script>
+    </script>
+}
+

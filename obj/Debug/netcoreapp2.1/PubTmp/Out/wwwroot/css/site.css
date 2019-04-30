@@ -1,0 +1,151 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rcorners2 {
+    border-radius: 15px;
+    border: 2px solid #5f5f5f;
+    padding: 20px;
+}
+
+
+
+/* === Print version (start) === */
+
+.print-version {
+    display: none;
+  }
+  
+  @media print {
+    .tabs,
+    .report-date,
+    .daily-report-copyright {
+      display: none;
+    }
+  
+    .print-version__logos {
+      max-width: 190px;
+      margin-left: auto;
+      text-align: center;
+      margin-right: 0;
+      position: relative;
+      right: -47px;
+    }
+  
+    .print-version__logos img {
+      width: 130px;
+      margin-bottom: 30px;
+    }
+  
+    .print-version__logos img:nth-child(1) {
+      width: 70px;
+    }
+  
+    .print-version {
+      display: flex;
+    }
+  
+    .print-version__left-side {
+      flex: 1;
+      position: relative;
+      left: 15px;
+    }
+  
+    .print-version__report-input {
+      width: 230px;
+    }
+  
+    @page {
+      margin: 0;
+    }
+  }
+  
+  
+  .report-date__input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  
+  .report-date__arrow-up {
+    border: solid black; 
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 2px;
+    outline: none;
+    transform: rotate(-45deg);
+  }
+  
+  .report-date__arrow-down {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+    margin-left: 2px;
+    transform: rotate(135deg);
+    outline: none;
+  }
+  
+  .report-date__container {
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .report-date__buttons {
+    display: flex;
+    position: relative;
+  }
+  
+  .report-date__buttons button {
+    padding: 5px 10px;
+  }
+  
+  .report-date__form  {
+    padding-left: 0;
+  }
+  
+  .dr-day-comment {
+    border-right-color: transparent!important;
+  }
+
+/* === Print version (end) === */

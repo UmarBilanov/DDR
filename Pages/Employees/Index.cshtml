@@ -1,0 +1,130 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Employees.IndexModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="container">
+    <div class="col-sm-9">
+        <div id="exTab2">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a id="QueryStringEmployee">@Localizer["EMPLOYEE"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringCrew">@Localizer["CREW"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringDrill">@Localizer["DRILL"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringHole">@Localizer["HOLE"]</a>
+                </li>
+                <li>
+                    <a id="QueryStringEquipment">@Localizer["EQUIPMENT"]</a>
+                </li>
+            </ul>
+            <br />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Employee[0].EmployeeCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Employee[0].Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Employee[0].Surname)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Employee[0].Company)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Employee[0].Position)
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Employee)
+                {
+                    if (item.ID == 53)
+                    {
+                        <tr></tr>   
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Surname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Company)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Position)
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.EndDate.ToString()) && item.EndDate < DateTime.Today)
+                                {
+                                    <p>@Localizer["Disactive"]</p>
+                                }
+                                else
+                                {
+                                    <p>@Localizer["Active"]</p>
+                                }
+                            </td>
+                            <td>
+                                <a class="QueryStringEdit" asp-page="./Edit" asp-route-id="@item.ID">@Localizer["Edit"]</a> |
+                                <a class="QueryStringDelete" asp-page="./Delete" asp-route-id="@item.ID">@Localizer["Delete"]</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBackToHome" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+        <button type="button" id="btnQueryStringCreateNewEmployee" class="btn btn-block">@Localizer["CREATE NEW"]</button><br />
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript">
+
+        $(function () {
+            $('a.QueryStringEdit').each(function () {
+                var url = $(this).attr('href');
+                if (url != "") {
+                    $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+                }
+            });
+
+            $('a.QueryStringDelete').each(function () {
+                var url = $(this).attr('href');
+                if (url != "") {
+                    $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+                }
+            });
+
+            $("#btnQueryStringCreateNewEmployee").bind("click", function () {
+                var url = "/Employees/create" + window.location.search;
+                window.location.href = url;
+            });
+            
+        });
+
+    </script>
+}

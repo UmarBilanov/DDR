@@ -1,0 +1,1476 @@
+﻿@page
+@model DiamondDrillingReport.Pages.CreateDailyReports.EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@section Scripts
+{
+<script type="text/javascript">
+    // Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+    // for details on configuring this project to bundle and minify static web assets.
+    var apiBaseUrl = document.location.origin;
+    // Write your Javascript code.
+
+    $(document).ready(function () {
+        //var now = new Date();
+
+        //var day = ("0" + now.getDate()).slice(-2);
+        //var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        //var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+        //$('#TodayDate').val(today);
+
+        $('.watertruckhide').find('option:contains("none")').hide();
+        $('.crewDay').find('option:contains("NoName")').hide();
+        $('.crewNight').find('option:contains("NoName")').hide();
+
+
+    });
+
+    $(document).ready(function () {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var obj = JSON.parse(this.responseText);
+                document.getElementById("UserID").value = obj[0].user_id; // user_id
+                //console.log(document.getElementById("UserID").value);
+                //console.log(obj[0].user_claims[10].val);
+            }
+        };
+        xhttp.open("GET", apiBaseUrl + "/.auth/me", true);
+        xhttp.send();
+
+    });
+
+
+    $("#dynamic_select").on('change',
+        function () {
+            var apiUrl = document.URL;
+            var url = apiUrl + $(this).val(); // get selected value
+            if (url) { // require a URL
+                window.location = url; // redirect
+            }
+            return false;
+        });
+
+    $("#HoleID").bind('change',
+        function () {
+            var HoleID = this.value;
+            if (HoleID == null)
+                return;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("Drill").innerHTML = this.responseText
+                    document.getElementById("Drill").innerHTML = $('#DetailsDrill')[0].outerText;
+
+                    document.getElementById("Dip").innerHTML = this.responseText
+                    document.getElementById("Dip").innerHTML = $('#DetailsDip')[0].outerText;
+
+                    document.getElementById("StartDate").innerHTML = this.responseText
+                    document.getElementById("StartDate").innerHTML = $('#DetailsStartDate')[0].outerText;
+
+                    document.getElementById("Az").innerHTML = this.responseText
+                    document.getElementById("Az").innerHTML = $('#DetailsAz')[0].outerText;
+
+                    document.getElementById("Status").innerHTML = this.responseText
+                    document.getElementById("Status").innerHTML = $('#DetailsStatus')[0].outerText;
+
+                    document.getElementById("HoleDepth").innerHTML = this.responseText
+                    document.getElementById("HoleDepth").innerHTML = $('#DetailsHoleDepth')[0].outerText;
+
+                    document.getElementById("HoleCode").innerHTML = this.responseText
+                    document.getElementById("HoleCode").innerHTML = $('#DetailsHoleCode')[0].outerText;
+
+                    var HoleCode = $('#HoleCode')[0].outerText.trim();
+                    if (HoleCode == null)
+                        return;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+
+                            document.getElementById("HoleDepthFromDay").innerHTML = this.responseText
+                            document.getElementById("HoleDepthFromDay").innerHTML = $('#HoleDepthToNight')[0].outerText;
+
+                            if (isNaN(parseFloat(document.getElementById("HoleDepthFromDay").innerHTML))) {
+                                document.getElementById("HoleDepthFromDay").innerHTML = 0;
+                            }
+
+                            document.getElementById("CasingFromDay").innerHTML = this.responseText
+                            document.getElementById("CasingFromDay").innerHTML = $('#CasingToNight')[0].outerText;
+
+                            if (isNaN(parseFloat(document.getElementById("CasingFromDay").innerHTML))) {
+                                document.getElementById("CasingFromDay").innerHTML = 0;
+                            }
+
+                        }
+                    };
+                    xhttp.open("GET", apiBaseUrl + "/CreateDailyReports/Index?HoleString=" + HoleCode, true);
+                    xhttp.send();
+
+                }
+            };
+            xhttp.open("GET", apiBaseUrl + "/Holes/Details?id=" + HoleID, true);
+            xhttp.send();
+        });
+    $("#HoleID").trigger('change');
+
+    $("#CrewIDDay").click('change', function () {
+        var CrewID = this.value;
+        if (CrewID == null)
+            return;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("DayOperator").innerHTML = this.responseText
+                document.getElementById("DayOperator").innerHTML = $('#DetailsOperator')[0].outerText;
+
+                var Operator = $('#DayOperator')[0].outerText;
+                if (Operator == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        document.getElementById("DayOperatorName").innerHTML = this.responseText
+                        document.getElementById("DayOperatorName").innerHTML = $('#DetailsFullname')[0].outerText;
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Operator, true);
+                xhttp.send();
+
+                document.getElementById("DayHelper1").innerHTML = this.responseText
+                document.getElementById("DayHelper1").innerHTML = $('#DetailsHelper1')[0].outerText;
+
+                var Helper1 = $('#DayHelper1')[0].outerText;;
+                if (Helper1 == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        document.getElementById("DayHelper1Name").innerHTML = this.responseText
+                        document.getElementById("DayHelper1Name").innerHTML = $('#DetailsFullname')[0].outerText;
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper1, true);
+                xhttp.send();
+
+
+                document.getElementById("DayHelper2").innerHTML = this.responseText
+                document.getElementById("DayHelper2").innerHTML = $('#DetailsHelper2')[0].outerText;
+
+                var Helper2 = $('#DayHelper2')[0].outerText;;
+                if (Helper2 == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        document.getElementById("DayHelper2Name").innerHTML = this.responseText
+                        document.getElementById("DayHelper2Name").innerHTML = $('#DetailsFullname')[0].outerText;
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper2, true);
+                xhttp.send();
+
+                document.getElementById("DayHelper3").innerHTML = this.responseText
+                document.getElementById("DayHelper3").innerHTML = $('#DetailsHelper3')[0].outerText;
+
+                var Helper3 = $('#DayHelper3')[0].outerText;;
+                if (Helper3 == null)
+                    return;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+
+                        document.getElementById("DayHelper3Name").innerHTML = this.responseText
+                        document.getElementById("DayHelper3Name").innerHTML = $('#DetailsFullname')[0].outerText;
+                    }
+                };
+                xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper3, true);
+                xhttp.send();
+            }
+        };
+        xhttp.open("GET", apiBaseUrl + "/Crews/Details?id=" + CrewID, true);
+        xhttp.send();
+
+    });
+
+
+    $("#CrewIDNight").click('change',
+        function () {
+            var CrewID = this.value;
+            if (CrewID == null)
+                return;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    document.getElementById("NightOperator").innerHTML = this.responseText
+                    document.getElementById("NightOperator").innerHTML = $('#DetailsOperator')[0].outerText;
+
+                    var Operator = $('#NightOperator')[0].outerText;;
+                    if (Operator == null)
+                        return;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+
+                            document.getElementById("NightOperatorName").innerHTML = this.responseText
+                            document.getElementById("NightOperatorName").innerHTML = $('#DetailsFullname')[0].outerText;
+                        }
+                    };
+                    xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Operator, true);
+                    xhttp.send();
+
+
+                    document.getElementById("NightHelper1").innerHTML = this.responseText
+                    document.getElementById("NightHelper1").innerHTML = $('#DetailsHelper1')[0].outerText;
+
+                    var Helper1 = $('#NightHelper1')[0].outerText;;
+                    if (Helper1 == null)
+                        return;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+
+                            document.getElementById("NightHelper1Name").innerHTML = this.responseText
+                            document.getElementById("NightHelper1Name").innerHTML = $('#DetailsFullname')[0].outerText;
+                        }
+                    };
+                    xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper1, true);
+                    xhttp.send();
+
+
+                    document.getElementById("NightHelper2").innerHTML = this.responseText
+                    document.getElementById("NightHelper2").innerHTML = $('#DetailsHelper2')[0].outerText;
+
+                    var Helper2 = $('#NightHelper2')[0].outerText;;
+                    if (Helper2 == null)
+                        return;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+
+                            document.getElementById("NightHelper2Name").innerHTML = this.responseText
+                            document.getElementById("NightHelper2Name").innerHTML = $('#DetailsFullname')[0].outerText;
+                        }
+                    };
+                    xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper2, true);
+                    xhttp.send();
+
+                    document.getElementById("NightHelper3").innerHTML = this.responseText
+                    document.getElementById("NightHelper3").innerHTML = $('#DetailsHelper3')[0].outerText;
+
+                    var Helper3 = $('#NightHelper3')[0].outerText;;
+                    if (Helper3 == null)
+                        return;
+
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+
+                            document.getElementById("NightHelper3Name").innerHTML = this.responseText
+                            document.getElementById("NightHelper3Name").innerHTML = $('#DetailsFullname')[0].outerText;
+                        }
+                    };
+                    xhttp.open("GET", apiBaseUrl + "/Employees/Details?id=" + Helper3, true);
+                    xhttp.send();
+                }
+
+            };
+            xhttp.open("GET", apiBaseUrl + "/Crews/Details?id=" + CrewID, true);
+            xhttp.send();
+
+        });
+
+
+    $("#HoleDepthToDay, #HoleDepthToNight").bind('change',
+        function () {
+            var HoleDepthFromDay = document.getElementById('HoleDepthFromDay').innerHTML;
+            var HoleDepthFromNight = document.getElementById('HoleDepthToDay').value;
+            var result = parseFloat(HoleDepthFromNight) - parseFloat(HoleDepthFromDay);
+            if (!isNaN(result)) {
+                document.getElementById('MetersDrilledDay').value = result.toFixed(2);
+                document.getElementById('HoleDepthFromNight').value = parseFloat(HoleDepthFromNight).toFixed(2);
+            }
+
+            var HoleDepthToNight = document.getElementById('HoleDepthToNight').value;
+
+            if (parseFloat(HoleDepthToNight) == 0) {
+                var result2 = 0;
+            } else {
+                result2 = parseFloat(HoleDepthToNight) - parseFloat(HoleDepthFromNight).toFixed(2);
+            }
+
+            if (!isNaN(result2) && !isNaN(result)) {
+                document.getElementById('MetersDrilledNight').value = result2.toFixed(2);
+                document.getElementById('HoleDepthFromTotal').value = result + result2;
+                document.getElementById('MetersDrilledTotal').value = result + result2;
+            }
+
+            var HoleDepth = document.getElementById("HoleDepth").innerHTML;
+            var result3 = (((result + result2) / parseFloat(HoleDepth)) * 100).toFixed(2);
+            if (!isNaN(result3)) {
+                document.getElementById('HoleDepthPercentage').value = result3 + " %";
+            }
+
+        });
+    $("#HoleDepthToDay, #HoleDepthToNight").trigger('change');
+
+    $("#CasingToDay, #CasingToNight").bind('change',
+        function () {
+            var CasingFromDay = document.getElementById('CasingFromDay').innerHTML;
+            var CasingFromNight = document.getElementById('CasingToDay').value;
+            var result = parseFloat(CasingFromNight) - parseFloat(CasingFromDay);
+            if (!isNaN(result)) {
+                document.getElementById('CasingMetersDay').value = result.toFixed(2);
+                document.getElementById('CasingFromNight').value = parseFloat(CasingFromNight).toFixed(2);
+            }
+
+            var CasingToNight = document.getElementById('CasingToNight').value;
+
+            if (parseFloat(CasingToNight) == 0) {
+                var result2 = 0;
+            } else {
+                result2 = parseFloat(CasingToNight) - result;
+            }
+
+            if (!isNaN(result2) && !isNaN(result)) {
+                document.getElementById('CasingMetersNight').value = result2.toFixed(2);
+                document.getElementById('CasingFromTotal').value = result + result2;
+                document.getElementById('CasingMetersTotal').value = result + result2;
+            }
+
+        });
+    $("#CasingToDay, #CasingToNight").trigger('change');
+
+    $(document).ready(function () {
+        //this calculates values automatically
+        sumCasingFT();
+        $("#CasingFromDay, #CasingFromNight").on("keydown keyup",
+            function () {
+                sumCasingFT();
+            });
+    });
+
+    function sumCasingFT() {
+        var num1 = document.getElementById('CasingFromDay').value;
+        var num2 = document.getElementById('CasingFromNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('CasingFromTotal').value = result.toFixed(2);
+        }
+    }
+
+    $(document).ready(function () {
+        //this calculates values automatically
+        sumCasingTT();
+        $("#CasingToDay, #CasingToNight").on("keydown keyup",
+            function () {
+                sumCasingTT();
+            });
+    });
+
+    function sumCasingTT() {
+        var num1 = document.getElementById('CasingToDay').value;
+        var num2 = document.getElementById('CasingToNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('CasingToTotal').value = result.toFixed(2);
+        }
+    }
+
+    $(document).ready(function () {
+        //this calculates values automatically
+        sumPreStart();
+        $("#PreStartDay, #PreStartNight").on("keydown keyup",
+            function () {
+                sumPreStart();
+            });
+
+        sumCondition();
+        $("#ConditionDay, #ConditionNight").on("keydown keyup",
+            function () {
+                sumCondition();
+            });
+
+        sumDrilling();
+        $("#DrillingDay, #DrillingNight").on("keydown keyup",
+            function () {
+                sumDrilling();
+            });
+
+        sumReaming();
+        $("#ReamingDay, #ReamingNight").on("keydown keyup",
+            function () {
+                sumReaming();
+            });
+
+        sumReamingCasing();
+        $("#ReamingCasingDay, #ReamingCasingNight").on("keydown keyup",
+            function () {
+                sumReamingCasing();
+            });
+
+        sumBitChange();
+        $("#BitChangeDay, #BitChangeNight").on("keydown keyup",
+            function () {
+                sumBitChange();
+            });
+
+        sumRepairs();
+        $("#RepairsDay, #RepairsNight").on("keydown keyup",
+            function () {
+                sumRepairs();
+            });
+
+        sumBlast();
+        $("#BlastDay, #BlastNight").on("keydown keyup",
+            function () {
+                sumBlast();
+            });
+
+        sumWaterDelay();
+        $("#WaterDelayDay, #WaterDelayNight").on("keydown keyup",
+            function () {
+                sumWaterDelay();
+            });
+
+        sumAwaitingPartsMaterials();
+        $("#AwaitingPartsMaterialsDay, #AwaitingPartsMaterialsNight").on("keydown keyup",
+            function () {
+                sumAwaitingPartsMaterials();
+            });
+
+        sumAwaitingMechanicElectrician();
+        $("#AwaitingMechanicElectricianDay, #AwaitingMechanicElectricianNight").on("keydown keyup",
+            function () {
+                sumAwaitingMechanicElectrician();
+            });
+
+        sumAwaitingDozer();
+        $("#AwaitingDozerDay, #AwaitingDozerNight").on("keydown keyup",
+            function () {
+                sumAwaitingDozer();
+            });
+
+        sumPreparationDrilling();
+        $("#PreparationDrillingDay, #PreparationDrillingNight").on("keydown keyup",
+            function () {
+                sumPreparationDrilling();
+            });
+
+        sumDismantling();
+        $("#DismantlingDay, #DismantlingNight").on("keydown keyup",
+            function () {
+                sumDismantling();
+            });
+
+        sumMovingRig();
+        $("#MovingRigDay, #MovingRigNight").on("keydown keyup",
+            function () {
+                sumMovingRig();
+            });
+
+        sumTests();
+        $("#TestsDay, #TestsNight").on("keydown keyup",
+            function () {
+                sumTests();
+            });
+
+        sumAwaitingDrillCrew();
+        $("#AwaitingDrillCrewDay, #AwaitingDrillCrewNight").on("keydown keyup",
+            function () {
+                sumAwaitingDrillCrew();
+            });
+    });
+
+    function sumPreStart() {
+        var num1 = document.getElementById('PreStartDay').value;
+        var num2 = document.getElementById('PreStartNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('PreStartTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumCondition() {
+        var num1 = document.getElementById('ConditionDay').value;
+        var num2 = document.getElementById('ConditionNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('ConditionTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumDrilling() {
+        var num1 = document.getElementById('DrillingDay').value;
+        var num2 = document.getElementById('DrillingNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('DrillingTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumReaming() {
+        var num1 = document.getElementById('ReamingDay').value;
+        var num2 = document.getElementById('ReamingNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('ReamingTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumReamingCasing() {
+        var num1 = document.getElementById('ReamingCasingDay').value;
+        var num2 = document.getElementById('ReamingCasingNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('ReamingCasingTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumBitChange() {
+        var num1 = document.getElementById('BitChangeDay').value;
+        var num2 = document.getElementById('BitChangeNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('BitChangeTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumRepairs() {
+        var num1 = document.getElementById('RepairsDay').value;
+        var num2 = document.getElementById('RepairsNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('RepairsTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumBlast() {
+        var num1 = document.getElementById('BlastDay').value;
+        var num2 = document.getElementById('BlastNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('BlastTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumWaterDelay() {
+        var num1 = document.getElementById('WaterDelayDay').value;
+        var num2 = document.getElementById('WaterDelayNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('WaterDelayTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumAwaitingPartsMaterials() {
+        var num1 = document.getElementById('AwaitingPartsMaterialsDay').value;
+        var num2 = document.getElementById('AwaitingPartsMaterialsNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('AwaitingPartsMaterialsTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumAwaitingMechanicElectrician() {
+        var num1 = document.getElementById('AwaitingMechanicElectricianDay').value;
+        var num2 = document.getElementById('AwaitingMechanicElectricianNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('AwaitingMechanicElectricianTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumAwaitingDozer() {
+        var num1 = document.getElementById('AwaitingDozerDay').value;
+        var num2 = document.getElementById('AwaitingDozerNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('AwaitingDozerTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumPreparationDrilling() {
+        var num1 = document.getElementById('PreparationDrillingDay').value;
+        var num2 = document.getElementById('PreparationDrillingNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('PreparationDrillingTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumDismantling() {
+        var num1 = document.getElementById('DismantlingDay').value;
+        var num2 = document.getElementById('DismantlingNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('DismantlingTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumMovingRig() {
+        var num1 = document.getElementById('MovingRigDay').value;
+        var num2 = document.getElementById('MovingRigNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('MovingRigTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumTests() {
+        var num1 = document.getElementById('TestsDay').value;
+        var num2 = document.getElementById('TestsNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('TestsTotal').value = result.toFixed(2);
+        }
+    }
+
+    function sumAwaitingDrillCrew() {
+        var num1 = document.getElementById('AwaitingDrillCrewDay').value;
+        var num2 = document.getElementById('AwaitingDrillCrewNight').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('AwaitingDrillCrewTotal').value = result.toFixed(2);
+        }
+    }
+
+    $(document).ready(function () {
+        //this calculates values automatically
+        averageDayHours()
+        $(
+            "#PreStartDay, #ConditionDay, #DrillingDay, #ReamingDay, #ReamingCasingDay, #BitChangeDay, #RepairsDay, #BlastDay, #WaterDelayDay, #AwaitingPartsMaterialsDay, #AwaitingMechanicElectricianDay, #AwaitingDozerDay, #PreparationDrillingDay, #DismantlingDay, #MovingRigDay, #TestsDay, #AwaitingDrillCrewDay")
+            .on("keydown keyup",
+                function () {
+                    averageDayHours()
+                });
+
+        averageNightHours()
+        $(
+            "#PreStartNight, #ConditionNight, #DrillingNight, #ReamingNight, #ReamingCasingNight, #BitChangeNight, #RepairsNight, #BlastNight, #WaterDelayNight, #AwaitingPartsMaterialsNight, #AwaitingMechanicElectricianNight, #AwaitingDozerNight, #PreparationDrillingNight, #DismantlingNight, #MovingRigNight, #TestsNight, #AwaitingDrillCrewNight")
+            .on("keydown keyup",
+                function () {
+                    averageNightHours()
+                });
+
+        sumOther();
+        $("#OtherDayHours, #OtherNightHours").on("keydown keyup",
+            function () {
+                sumOther();
+            });
+
+        ProductivityDay();
+        $("#DrillingDay, #MetersDrilledDay").on("keydown keyup",
+            function () {
+                ProductivityDay();
+            });
+
+        ProductivityNight();
+        $("#DrillingNight, #MetersDrilledNight").on("keydown keyup",
+            function () {
+                ProductivityNight();
+            });
+
+        ProductivityTotal();
+        $("#ProductivityDay, #ProductivityNight").on("keydown keyup",
+            function () {
+                ProductivityTotal();
+            });
+    });
+
+    function averageDayHours() {
+        var num1 = document.getElementById('PreStartDay').value;
+        var num2 = document.getElementById('ConditionDay').value;
+        var num3 = document.getElementById('DrillingDay').value;
+        var num4 = document.getElementById('ReamingDay').value;
+        var num5 = document.getElementById('ReamingCasingDay').value;
+        var num6 = document.getElementById('BitChangeDay').value;
+        var num7 = document.getElementById('RepairsDay').value;
+        var num8 = document.getElementById('BlastDay').value;
+        var num9 = document.getElementById('WaterDelayDay').value;
+        var num10 = document.getElementById('AwaitingPartsMaterialsDay').value;
+        var num11 = document.getElementById('AwaitingMechanicElectricianDay').value;
+        var num12 = document.getElementById('AwaitingDozerDay').value;
+        var num13 = document.getElementById('PreparationDrillingDay').value;
+        var num14 = document.getElementById('DismantlingDay').value;
+        var num15 = document.getElementById('MovingRigDay').value;
+        var num16 = document.getElementById('TestsDay').value;
+        var num17 = document.getElementById('AwaitingDrillCrewDay').value;
+        var total = document.getElementById('TotalDayHours').value;
+        var result = parseFloat(total) -
+            (parseFloat(num1) +
+                parseFloat(num2) +
+                parseFloat(num3) +
+                parseFloat(num4) +
+                parseFloat(num5) +
+                parseFloat(num6) +
+                parseFloat(num7) +
+                parseFloat(num8) +
+                parseFloat(num9) +
+                parseFloat(num10) +
+                parseFloat(num11) +
+                parseFloat(num12) +
+                parseFloat(num13) +
+                parseFloat(num14) +
+                parseFloat(num15) +
+                parseFloat(num16) +
+                parseFloat(num17));
+
+        if (!isNaN(result)) {
+            if (result < 0) {
+                alert("Input work hours must be less than the total work hours. Please check the inputed values.")
+            } else {
+                document.getElementById('OtherDayHours').value = result.toFixed(2);
+            }
+        }
+    }
+
+    function averageNightHours() {
+        var num1 = document.getElementById('PreStartNight').value;
+        var num2 = document.getElementById('ConditionNight').value;
+        var num3 = document.getElementById('DrillingNight').value;
+        var num4 = document.getElementById('ReamingNight').value;
+        var num5 = document.getElementById('ReamingCasingNight').value;
+        var num6 = document.getElementById('BitChangeNight').value;
+        var num7 = document.getElementById('RepairsNight').value;
+        var num8 = document.getElementById('BlastNight').value;
+        var num9 = document.getElementById('WaterDelayNight').value;
+        var num10 = document.getElementById('AwaitingPartsMaterialsNight').value;
+        var num11 = document.getElementById('AwaitingMechanicElectricianNight').value;
+        var num12 = document.getElementById('AwaitingDozerNight').value;
+        var num13 = document.getElementById('PreparationDrillingNight').value;
+        var num14 = document.getElementById('DismantlingNight').value;
+        var num15 = document.getElementById('MovingRigNight').value;
+        var num16 = document.getElementById('TestsNight').value;
+        var num17 = document.getElementById('AwaitingDrillCrewNight').value;
+        var total = document.getElementById('TotalNightHours').value;
+        var result = parseFloat(total) -
+            (parseFloat(num1) +
+                parseFloat(num2) +
+                parseFloat(num3) +
+                parseFloat(num4) +
+                parseFloat(num5) +
+                parseFloat(num6) +
+                parseFloat(num7) +
+                parseFloat(num8) +
+                parseFloat(num9) +
+                parseFloat(num10) +
+                parseFloat(num11) +
+                parseFloat(num12) +
+                parseFloat(num13) +
+                parseFloat(num14) +
+                parseFloat(num15) +
+                parseFloat(num16) +
+                parseFloat(num17));
+
+        if (!isNaN(result)) {
+            if (result < 0) {
+                alert("Input work hours must be less than the total work hours. Please check the inputed values.")
+            } else {
+                document.getElementById('OtherNightHours').value = result.toFixed(2);
+            }
+        }
+    }
+
+    function sumOther() {
+        var num1 = document.getElementById('OtherDayHours').value;
+        var num2 = document.getElementById('OtherNightHours').value;
+        var result = parseFloat(num1) + parseFloat(num2);
+        if (!isNaN(result)) {
+            document.getElementById('OtherTotalHours').value = result.toFixed(2);
+        }
+    }
+
+    function ProductivityDay() {
+        var DrillDayHour = document.getElementById('DrillingDay').value;
+        var DrillDayMeter = document.getElementById('MetersDrilledDay').value;
+
+        if (DrillDayHour == 0) {
+            document.getElementById('ProductivityDay').value = 0;
+        } else {
+            var result = parseFloat(DrillDayMeter) / parseFloat(DrillDayHour);
+            if (!isNaN(result)) {
+                document.getElementById('ProductivityDay').value = result.toFixed(2);
+            }
+        }
+    }
+
+    function ProductivityNight() {
+        var DrillNightHour = document.getElementById('DrillingNight').value;
+        var DrillNightMeter = document.getElementById('MetersDrilledNight').value;
+
+        if (DrillNightHour == 0) {
+            document.getElementById('ProductivityNight').value = 0;
+        } else {
+            var result = parseFloat(DrillNightMeter) / parseFloat(DrillNightHour);
+            if (!isNaN(result)) {
+                document.getElementById('ProductivityNight').value = result.toFixed(2);
+            }
+        }
+    }
+
+    function ProductivityTotal() {
+        var ProductivityDay = document.getElementById('ProductivityDay').value;
+        var ProductivityNight = document.getElementById('ProductivityNight').value;
+
+        var result = parseFloat(ProductivityDay) + parseFloat(ProductivityNight);
+        if (!isNaN(result)) {
+            document.getElementById('ProductivityTotal').value = result.toFixed(2);
+        }
+    }
+
+</script>
+}
+<hr />
+<div class="container">
+
+<div class="col-sm-9">
+    <form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="CreateDailyReport.ID" />
+        <div class="form-row">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td class="form-group col-sm-3">
+                        <label asp-for="CreateDailyReport.Date" class="control-label">@Localizer["DATE"]</label>
+                        <input asp-for="CreateDailyReport.Date" type="date" id="TodayDate" class="form-control" />
+                        <span asp-validation-for="CreateDailyReport.Date" class="text-danger"></span>
+                    </td>
+                    <td class="form-group col-sm-3">
+                        <input type="hidden" asp-for="CreateDailyReport.User" id="UserID" />
+                    </td>
+                    <td class="form-group col-sm-3">
+                        <label class="control-label">@Localizer["HOLE CODE"]</label>
+                        <select asp-for="CreateDailyReport.HoleID" class="form-control" id="HoleID" asp-items="ViewBag.HoleID">
+                            <option value="">@Localizer["SELECT HOLE"]</option>
+                        </select>
+                        <span asp-validation-for="CreateDailyReport.HoleID" class="text-danger">@ViewData["Message"]</span>
+                    </td>
+                    <td class="form-group col-sm-3">
+                        <label class="control-label">@Localizer["DRILL"]</label><br>
+                        <strong id="Drill"></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-group col-sm-2"></td>
+                    <td class="form-group col-sm-1"></td>
+                    <td class="form-group col-sm-3"></td>
+                    <td class="form-group col-sm-3"></td>
+                    <td class="form-group col-sm-3"></td>
+                </tr>
+                <tr>
+                    <td class="form-group col-sm-2">
+                        <strong>@Localizer["DIP"]</strong>
+                    </td>
+                    <td class="form-group col-sm-1">
+                        <strong id="Dip"></strong>
+                    </td>
+                    <td class="form-group col-sm-3"><input type="hidden" id="HoleCode" /></td>
+                    <td class="form-group col-sm-3">
+                        <strong>@Localizer["START DATE"]</strong>
+                    </td>
+                    <td class="form-group col-sm-3">
+                        <strong id="StartDate"></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="form-group col-sm-2">
+                        <strong>@Localizer["AZ"]</strong>
+                    </td>
+                    <td class="form-group col-sm-1">
+                        <strong id="Az"></strong>
+                    </td>
+                    <td class="form-group col-sm-3"></td>
+                    <td>
+                        <div class="form-group col-sm-3">
+                            <strong>@Localizer["STATUS"]</strong>
+                        </div>
+                    </td>
+                    <td class="form-group col-sm-3">
+                        <strong id="Status"></strong>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="form-group panel panel-default">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="active">
+                        <th>@Localizer["SHIFT"]</th>
+                        <th>@Localizer["UNIT"] </th>
+                        <th>@Localizer["DAY"]</th>
+                        <th>@Localizer["NIGHT"]</th>
+                        <th>@Localizer["TOTAL"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="active">@Localizer["WATER TRUCK"]</td>
+                        <td class="active"></td>
+                        <td>
+                            <select asp-for="CreateDailyReport.EquipmentID" class="form-control watertruckhide" asp-items="ViewBag.EquipmentDayID">
+                                <option value="16">@Localizer["SELECT WATERTRUCK"]</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select asp-for="CreateDailyReport.EquipmentNID" class="form-control watertruckhide" asp-items="ViewBag.EquipmentNightID">
+                                <option value="16">@Localizer["SELECT WATERTRUCK"]</option>
+                            </select>
+                        </td>
+                        <td class="active" rowspan="2">@Localizer["PROJECT DEPTH"] </td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["BITS"]</td>
+                        <td class="active"></td>
+                        <td>
+                            <input asp-for="CreateDailyReport.BitsDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.BitsNight" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["SHELL"]</td>
+                        <td class="active"></td>
+                        <td>
+                            <input asp-for="CreateDailyReport.ShellDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.ShellNight" class="form-control" />
+                        </td>
+                        <td class="active" id="HoleDepth"></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["HOLE DEPTH FROM"]</td>
+                        <td class="active">@Localizer["METER"]</td>
+                        <td class="active" id="HoleDepthFromDay"></td>
+                        <td class="active"><input type="text" value="0.0" id="HoleDepthFromNight" class="form-control" readonly /></td>
+                        <td class="active"><input type="text" value="0.0" id="HoleDepthFromTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["HOLE DEPTH TO"]</td>
+                        <td class="active">@Localizer["METER"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.HoleDepthToDay" value="0.0" id="HoleDepthToDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.HoleDepthToNight" value="0.0" id="HoleDepthToNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" value="0%" id="HoleDepthPercentage" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["METERS DRILLED"]</td>
+                        <td class="active">@Localizer["METER"]</td>
+                        <td class="active"><input asp-for="CreateDailyReport.MetersDrilledDay" value="0.0" id="MetersDrilledDay" class="form-control" readonly /></td>
+                        <td class="active"><input asp-for="CreateDailyReport.MetersDrilledNight" value="0.0" id="MetersDrilledNight" class="form-control" readonly /></td>
+                        <td class="active"><input type="text" value="0.0" id="MetersDrilledTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["CASING FROM"]</td>
+                        <td class="active">@Localizer["METER"]</td>
+                        <td class="active" id="CasingFromDay">
+                            @*<input asp-for="CreateDailyReport.CasingFromDay" value="0.0" id="CasingFromDay" class="form-control" />*@
+                        </td>
+                        <td class="active">
+                            <input type="text" value="0.0" id="CasingFromNight" class="form-control" readonly />
+                            @*<input asp-for="CreateDailyReport.CasingFromNight" value="0.0" id="CasingFromNight" class="form-control" />*@
+                        </td>
+                        <td class="active"><input type="text" name="CasingFromTotal" id="CasingFromTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["CASING TO"]</td>
+                        <td class="active">@Localizer["METER"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.CasingToDay" value="0.0" id="CasingToDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.CasingToNight" value="0.0" id="CasingToNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="CasingToTotal" id="CasingToTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["CASING METERS"]</td>
+                        <td class="active">@Localizer["METER"]</td>
+                        <td class="active"><input type="text" name="CasingMetersDay" id="CasingMetersDay" class="form-control" readonly /></td>
+                        <td class="active"><input type="text" name="CasingMetersNight" id="CasingMetersNight" class="form-control" readonly /></td>
+                        <td class="active"><input type="text" name="CasingMetersTotal" id="CasingMetersTotal" class="form-control" readonly /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group panel panel-default">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="active">
+                        <th></th>
+                        <th colspan="2">@Localizer["DAY"]</th>
+                        <th colspan="2">@Localizer["NIGHT"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="active">@Localizer["DRILL CREW"]</td>
+                        <td colspan="2">
+                            <select asp-for="CreateDailyReport.CrewID" class="form-control crewDay" id="CrewIDDay" asp-items="ViewBag.CrewDayID">
+                                <option value="28">@Localizer["SELECT CREW"]</option>
+                            </select>
+                        </td>
+                        <td colspan="2">
+                            <select asp-for="CreateDailyReport.CrewNID" class="form-control crewNight" id="CrewIDNight" asp-items="ViewBag.CrewNightID">
+                                <option value="28">@Localizer["SELECT CREW"]</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="active">
+                        <td>@Localizer["OPERATOR"]</td>
+                        <td id="DayOperator"></td>
+                        <td id="DayOperatorName"></td>
+                        <td id="NightOperator"></td>
+                        <td id="NightOperatorName"></td>
+                    </tr>
+                    <tr class="active">
+                        <td>@Localizer["HELPER 1"]</td>
+                        <td id="DayHelper1"></td>
+                        <td id="DayHelper1Name"></td>
+                        <td id="NightHelper1"></td>
+                        <td id="NightHelper1Name"></td>
+                    </tr>
+                    <tr class="active">
+                        <td>@Localizer["HELPER 2"]</td>
+                        <td id="DayHelper2"></td>
+                        <td id="DayHelper2Name"></td>
+                        <td id="NightHelper2"></td>
+                        <td id="NightHelper2Name"></td>
+                    </tr>
+                    <tr class="active">
+                        <td>@Localizer["HELPER 3"]</td>
+                        <td id="DayHelper3"></td>
+                        <td id="DayHelper3Name"></td>
+                        <td id="NightHelper3"></td>
+                        <td id="NightHelper3Name"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="form-row">
+            <div class="col-sm-6">
+                <label for="comment">@Localizer["DAY"]:</label>
+                <textarea asp-for="CreateDailyReport.CommentDay" class="form-control" rows="2"></textarea>
+            </div>
+            <div class="col-sm-6">
+                <label for="comment">@Localizer["NIGHT"]:</label>
+                <textarea asp-for="CreateDailyReport.CommentNight" class="form-control" rows="2"></textarea>
+            </div>
+        </div>
+        <br>
+        <br><br>
+        <br><br>
+        <div class="form-row">
+            <div class="panel panel-default">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="active">
+                            <th>@Localizer["DAY"]</th>
+                            <th>@Localizer["TEST"] #1</th>
+                            <th>@Localizer["TEST"] #2</th>
+                            <th>@Localizer["TEST"] #3</th>
+                            <th>@Localizer["TEST"] #4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="active">@Localizer["DEPTH"]</td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayDepth" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayDepth2" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayDepth3" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayDepth4" value="0.0" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="active">@Localizer["DIP"]</td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayDIP" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayDIP2" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayDIP3" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayDIP4" value="0.0" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="active">@Localizer["AZ"]</td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayAZ" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayAZ2" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayAZ3" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayAZ4" value="0.0" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="active">@Localizer["MAG"]</td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayMAG" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayMAG2" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayMAG3" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestDayMAG4" value="0.0" class="form-control" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="active">
+                            <th>@Localizer["NIGHT"]</th>
+                            <th>@Localizer["TEST"] #1</th>
+                            <th>@Localizer["TEST"] #2</th>
+                            <th>@Localizer["TEST"] #3</th>
+                            <th>@Localizer["TEST"] #4</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="active">@Localizer["DEPTH"]</td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightDepth" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightDepth2" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightDepth3" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightDepth4" value="0.0" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="active">@Localizer["DIP"]</td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightDIP" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightDIP2" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightDIP3" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightDIP4" value="0.0" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="active">@Localizer["AZ"]</td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightAZ" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightAZ2" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightAZ3" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightAZ4" value="0.0" class="form-control" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="active">@Localizer["MAG"]</td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightMAG" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightMAG2" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightMAG3" value="0.0" class="form-control" />
+                            </td>
+                            <td>
+                                <input asp-for="CreateDailyReport.TestNightMAG4" value="0.0" class="form-control" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="active">
+                        <th>@Localizer["HOURS"]</th>
+                        <th>@Localizer["UNIT"]</th>
+                        <th>@Localizer["DAY"]</th>
+                        <th>@Localizer["NIGHT"]</th>
+                        <th>@Localizer["TOTAL"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="active">@Localizer["PRE-START"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.PreStartDay" value="0.0" id="PreStartDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.PreStartNight" value="0.0" id="PreStartNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="PreStartTotal" id="PreStartTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["CONDITION HOLE"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.ConditionDay" value="0.0" id="ConditionDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.ConditionNight" value="0.0" id="ConditionNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="ConditionTotal" id="ConditionTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["DRILLING"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.DrillingDay" value="0.0" id="DrillingDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.DrillingNight" value="0.0" id="DrillingNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="DrillingTotal" id="DrillingTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["REAMING"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.ReamingDay" value="0.0" id="ReamingDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.ReamingNight" value="0.0" id="ReamingNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="ReamingTotal" id="ReamingTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["REAMING CASING"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.ReamingCasingDay" value="0.0" id="ReamingCasingDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.ReamingCasingNight" value="0.0" id="ReamingCasingNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="ReamingCasingTotal" id="ReamingCasingTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["BIT CHANGE"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.BitChangeDay" value="0.0" id="BitChangeDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.BitChangeNight" value="0.0" id="BitChangeNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="BitChangeTotal" id="BitChangeTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["REPAIRS"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.RepairsDay" value="0.0" id="RepairsDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.RepairsNight" value="0.0" id="RepairsNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="RepairsTotal" id="RepairsTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["BLAST"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.BlastDay" value="0.0" id="BlastDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.BlastNight" value="0.0" id="BlastNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="BlastTotal" id="BlastTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["WATER DELAY"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.WaterDelayDay" value="0.0" id="WaterDelayDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.WaterDelayNight" value="0.0" id="WaterDelayNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="WaterDelayTotal" id="WaterDelayTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["AWAITING PARTS/MATERIALS"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.AwaitingPartsMaterialsDay" value="0.0" id="AwaitingPartsMaterialsDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.AwaitingPartsMaterialsNight" value="0.0" id="AwaitingPartsMaterialsNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="AwaitingPartsMaterialsTotal" id="AwaitingPartsMaterialsTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["AWAITING MECHANIC/ELECTRICIAN"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.AwaitingMechanicElectricianDay" value="0.0" id="AwaitingMechanicElectricianDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.AwaitingMechanicElectricianNight" value="0.0" id="AwaitingMechanicElectricianNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="AwaitingMechanicElectricianTotal" id="AwaitingMechanicElectricianTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["AWAITING DOZER"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.AwaitingDozerDay" value="0.0" id="AwaitingDozerDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.AwaitingDozerNight" value="0.0" id="AwaitingDozerNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="AwaitingDozerTotal" id="AwaitingDozerTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["PREPARATION FOR DRILLING"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.PreparationDrillingDay" value="0.0" id="PreparationDrillingDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.PreparationDrillingNight" value="0.0" id="PreparationDrillingNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="PreparationDrillingTotal" id="PreparationDrillingTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["DISMANTLING"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.DismantlingDay" value="0.0" id="DismantlingDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.DismantlingNight" value="0.0" id="DismantlingNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="DismantlingTotal" id="DismantlingTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["MOVING RIG"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.MovingRigDay" value="0.0" id="MovingRigDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.MovingRigNight" value="0.0" id="MovingRigNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="MovingRigTotal" id="MovingRigTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["TESTS"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.TestsDay" value="0.0" id="TestsDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.TestsNight" value="0.0" id="TestsNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="TestsTotal" id="TestsTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr>
+                        <td class="active">@Localizer["AWAITING DRILL CREW"]</td>
+                        <td class="active">@Localizer["HOUR"]</td>
+                        <td>
+                            <input asp-for="CreateDailyReport.AwaitingDrillCrewDay" value="0.0" id="AwaitingDrillCrewDay" class="form-control" />
+                        </td>
+                        <td>
+                            <input asp-for="CreateDailyReport.AwaitingDrillCrewNight" value="0.0" id="AwaitingDrillCrewNight" class="form-control" />
+                        </td>
+                        <td class="active"><input type="text" name="AwaitingDrillCrewTotal" id="AwaitingDrillCrewTotal" class="form-control" readonly /></td>
+                    </tr>
+                    <tr class="active">
+                        <td>@Localizer["OTHER"]</td>
+                        <td>@Localizer["HOUR"]</td>
+                        <td><input type="text" name="OtherDayHours" id="OtherDayHours" class="form-control" readonly /></td>
+                        <td><input type="text" name="OtherNightHours" id="OtherNightHours" class="form-control" readonly /></td>
+                        <td><input type="text" name="OtherTotalHours" id="OtherTotalHours" class="form-control" readonly /></td>
+                    </tr>
+                    <tr class="active">
+                        <td>@Localizer["TOTAL HRS"]</td>
+                        <td>@Localizer["HOUR"]</td>
+                        <td><input type="text" value="11.0" name="TotalDayHours" id="TotalDayHours" class="form-control" readonly /></td>
+                        <td><input type="text" value="11.0" name="TotalNightHours" id="TotalNightHours" class="form-control" readonly /></td>
+                        <td><input type="text" value="22.0" name="TotalHours" id="TotalHours" class="form-control" readonly /></td>
+                    </tr>
+                    <tr class="active">
+                        <td>@Localizer["PRODUCTIVITY"]</td>
+                        <td>@Localizer["METER/HOUR"]</td>
+                        <td><input type="text" name="ProductivityDay" id="ProductivityDay" class="form-control" readonly /></td>
+                        <td><input type="text" name="ProductivityNight" id="ProductivityNight" class="form-control" readonly /></td>
+                        <td><input type="text" name="ProductivityTotal" id="ProductivityTotal" class="form-control" readonly /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="col-sm-8">
+            </div>
+            <div class="col-sm-4">
+                <button type="submit" value="Create" class="btn btn-block">@Localizer["SAVE"]</button>
+            </div>
+        </div>
+    </form>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBack" class="btn btn-block">@Localizer["BACK"]</button><br />
+    </div>
+</div>

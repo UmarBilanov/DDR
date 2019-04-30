@@ -1,0 +1,24 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Areas.CompleteModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="container">
+    <div class="col-sm-9">
+        <h3>
+            @Localizer["The area is successfully created."]
+        </h3>
+    </div>
+
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBack" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $("#btnQueryStringBack").bind("click", function () {
+            var url = "/Areas" + window.location.search;
+            window.location.href = url;
+        });
+    </script>
+}

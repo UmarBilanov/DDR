@@ -1,0 +1,140 @@
+﻿@*@page
+@model DiamondDrillingReport.Pages.CreateDailyReports.IndexFullModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System
+@inject IViewLocalizer Localizer
+@{
+    var CurrentQuery = Request.QueryString;
+    string query = Convert.ToString(CurrentQuery);
+    var result = "en";
+    var VarQuery = query.Length;
+    if (VarQuery != 0)
+    {
+        result = query.Substring(VarQuery - 2);
+    }
+
+}
+@section Scripts
+    {
+    <script type="text/javascript">
+
+
+        $('a.QueryStringEdit').each(function () {
+            var url = $(this).attr('href');
+            if (url != "") {
+                $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+            }
+        });
+
+        $('a.QueryStringDelete').each(function () {
+            var url = $(this).attr('href');
+            if (url != "") {
+                $(this).attr('href', $(this).attr('href') + "&" + window.location.search.substring(1));
+            }
+        });
+
+        $("#btnQueryStringBackToHomeIndex").bind("click", function () {
+            var QueryStringLength = window.location.search.length;
+            if (QueryStringLength >= 10) {
+                var url = "/?" + window.location.search.substring(window.location.search.length - 10, window.location.search.length);
+                window.location.href = url;
+            } else {
+                var url = "/";
+                window.location.href = url;
+            }
+        });
+
+        $("#dynamic_select").on('change', function () {
+            var apiUrl = document.URL;
+            var url = apiUrl + $(this).val(); // get selected value
+            if (url) { // require a URL
+                window.location = url; // redirect
+            }
+            return false;
+        });
+    </script>
+}
+
+<hr />
+<div class="container">
+    <div class="col-sm-9">
+        </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBackToHomeIndex" class="btn btn-block">@Localizer["BACK"]</button><br />
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDailyReport[0].Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDailyReport[0].HoleID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDailyReport[0].HoleDepthToDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDailyReport[0].HoleDepthToNight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDailyReport[0].CasingFromDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDailyReport[0].CasingFromNight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDailyReport[0].CasingToDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDailyReport[0].CasingToNight)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDailyReport[0].User)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CreateDailyReport)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hole.HoleCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoleDepthToDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HoleDepthToNight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CasingFromDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CasingFromNight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CasingToDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CasingToNight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User)
+                    </td>
+                    <td>
+                        <a class="QueryStringEdit" asp-page="./Edit" asp-route-id="@item.ID">@Localizer["Edit"]</a> | <a class="QueryStringDelete" asp-page="./Delete" asp-route-id="@item.ID">@Localizer["Delete"]</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>*@

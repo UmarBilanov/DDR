@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AWAITING DOZER	AWAITING DOZER" xml:space="preserve">
+    <value>ОЖИДАНИЕ БУЛЬДОЗЕРА</value>
+  </data>
+  <data name="AWAITING DRILL CREW" xml:space="preserve">
+    <value>ОЖИДАНИЕ БУРОВОЙ БРИГАДЫ</value>
+  </data>
+  <data name="AWAITING MECHANIC/ELECTRICIAN" xml:space="preserve">
+    <value>ОЖИДАНИЕ МЕХАНИКА/ЭЛЕКТРИКА</value>
+  </data>
+  <data name="AWAITING PARTS/MATERIALS" xml:space="preserve">
+    <value>ОЖИДАНИЕ ЗАПЧАСТЕЙ/МАТЕРИАЛОВ</value>
+  </data>
+  <data name="AZ" xml:space="preserve">
+    <value>АЗИМУТ</value>
+  </data>
+  <data name="BACK" xml:space="preserve">
+    <value>НАЗАД</value>
+  </data>
+  <data name="Back to List" xml:space="preserve">
+    <value>Назад к списку</value>
+  </data>
+  <data name="BIT CHANGE" xml:space="preserve">
+    <value>ЗАМЕНА КОРОНКИ</value>
+  </data>
+  <data name="BITS" xml:space="preserve">
+    <value>КОРОНКА</value>
+  </data>
+  <data name="BLAST" xml:space="preserve">
+    <value>ВЗРЫВ</value>
+  </data>
+  <data name="CANCEL" xml:space="preserve">
+    <value>ОТМЕНА</value>
+  </data>
+  <data name="CASING FROM" xml:space="preserve">
+    <value>ОБСАДКА ОТ</value>
+  </data>
+  <data name="CASING METERS" xml:space="preserve">
+    <value>ОБСАДКА</value>
+  </data>
+  <data name="CASING TO" xml:space="preserve">
+    <value>ОБСАДКА ДО</value>
+  </data>
+  <data name="CONDITION HOLE" xml:space="preserve">
+    <value>ПРОВЫВКА СКВАЖИНЫ</value>
+  </data>
+  <data name="DAY" xml:space="preserve">
+    <value>ДЕНЬ</value>
+  </data>
+  <data name="DEPTH" xml:space="preserve">
+    <value>ГЛУБИНА</value>
+  </data>
+  <data name="DIP" xml:space="preserve">
+    <value>УГОЛ</value>
+  </data>
+  <data name="DISMANTLING" xml:space="preserve">
+    <value>ДЕМОНТАЖ</value>
+  </data>
+  <data name="DRILL" xml:space="preserve">
+    <value>БУРОВАЯ УСТАНОВКА</value>
+  </data>
+  <data name="DRILL CREW" xml:space="preserve">
+    <value>БУРОВОЙ ЭКИПАЖ</value>
+  </data>
+  <data name="DRILLING" xml:space="preserve">
+    <value>БУРЕНИЕ</value>
+  </data>
+  <data name="HELPER 1" xml:space="preserve">
+    <value>ПОМОЩНИК 1</value>
+  </data>
+  <data name="HELPER 2" xml:space="preserve">
+    <value>ПОМОЩНИК 2</value>
+  </data>
+  <data name="HELPER 3" xml:space="preserve">
+    <value>ПОМОЩНИК 3</value>
+  </data>
+  <data name="HOLE CODE" xml:space="preserve">
+    <value>КОД СКВАЖИНЫ</value>
+  </data>
+  <data name="HOLE DEPTH FROM" xml:space="preserve">
+    <value>ГЛУБИНА СКВ. ОТ</value>
+  </data>
+  <data name="HOLE DEPTH TO" xml:space="preserve">
+    <value>ГЛУБИНА СКВ. ДО</value>
+  </data>
+  <data name="HOUR" xml:space="preserve">
+    <value>ЧАС</value>
+  </data>
+  <data name="HOURS" xml:space="preserve">
+    <value>ЧАСЫ</value>
+  </data>
+  <data name="MAG" xml:space="preserve">
+    <value>МАГНИТНОСТЬ</value>
+  </data>
+  <data name="METER" xml:space="preserve">
+    <value>МЕТР</value>
+  </data>
+  <data name="METER/HOUR" xml:space="preserve">
+    <value>МЕТР/ЧАС</value>
+  </data>
+  <data name="METERS DRILLED" xml:space="preserve">
+    <value>ПРОБУРЕН.МЕТРЫ</value>
+  </data>
+  <data name="MOVING RIG" xml:space="preserve">
+    <value>ТРАНСПОРТИРОВКА СТАНКА</value>
+  </data>
+  <data name="NIGHT" xml:space="preserve">
+    <value>НОЧЬ</value>
+  </data>
+  <data name="OPERATOR" xml:space="preserve">
+    <value>ОПЕРАТОР</value>
+  </data>
+  <data name="OTHER" xml:space="preserve">
+    <value>ПРОЧЕЕ</value>
+  </data>
+  <data name="PRE-START" xml:space="preserve">
+    <value>ПРЕДСТАРТОВАЯ ПОДГОТОВКА</value>
+  </data>
+  <data name="PREPARATION FOR DRILLING" xml:space="preserve">
+    <value>ПОДГОТОВКА К БУРЕНИЮ</value>
+  </data>
+  <data name="PRODUCTIVITY" xml:space="preserve">
+    <value>ЭФФЕКТИВНОСТЬ</value>
+  </data>
+  <data name="PROJECT DEPTH" xml:space="preserve">
+    <value>ПРОЕКТНАЯ ГЛУБИНА</value>
+  </data>
+  <data name="REAMING" xml:space="preserve">
+    <value>РАЗБУРКА</value>
+  </data>
+  <data name="REAMING CASING" xml:space="preserve">
+    <value>РАЗБУРКА ОБСАДКИ</value>
+  </data>
+  <data name="REPAIRS" xml:space="preserve">
+    <value>РЕМОНТ</value>
+  </data>
+  <data name="SAVE" xml:space="preserve">
+    <value>СОХРАНИТЬ</value>
+  </data>
+  <data name="SHELL" xml:space="preserve">
+    <value>КОРОНКА НА ОБСАДКУ</value>
+  </data>
+  <data name="SHIFT" xml:space="preserve">
+    <value />
+  </data>
+  <data name="START DATE" xml:space="preserve">
+    <value>ДАТА НАЧАЛА</value>
+  </data>
+  <data name="STATUS" xml:space="preserve">
+    <value>СТАТУС</value>
+  </data>
+  <data name="TEST" xml:space="preserve">
+    <value>ТЕСТ</value>
+  </data>
+  <data name="TESTS" xml:space="preserve">
+    <value>ТЕСТЫ</value>
+  </data>
+  <data name="TOTAL" xml:space="preserve">
+    <value>ВСЕГО</value>
+  </data>
+  <data name="TOTAL HRS" xml:space="preserve">
+    <value>ВСЕГО ЧАСОВ</value>
+  </data>
+  <data name="UNIT" xml:space="preserve">
+    <value>ЕДИНИЦА</value>
+  </data>
+  <data name="WATER DELAY" xml:space="preserve">
+    <value>ЗАДЕРЖКА ВОДЫ</value>
+  </data>
+  <data name="WATER TRUCK" xml:space="preserve">
+    <value>НАЗВАНИЕ ВОДОВОЗА</value>
+  </data>
+  <data name="DATE" xml:space="preserve">
+    <value>ДАТА</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="SELECT CREW" xml:space="preserve">
+    <value>ВЫБЕРИТЕ БРИГАДУ</value>
+  </data>
+  <data name="SELECT HOLE" xml:space="preserve">
+    <value>ВЫБЕРИТЕ СКВАЖИНУ</value>
+  </data>
+  <data name="SELECT WATERTRUCK" xml:space="preserve">
+    <value>ВЫБЕРИТЕ ВОДОВОЗА </value>
+  </data>
+</root>

@@ -1,0 +1,275 @@
+﻿@page
+@model DiamondDrillingReport.Pages.Holes.EditModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+<hr />
+<div class="row">
+    <div class="col-sm-9">
+        <h4>@Localizer["HOLE"]</h4>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Hole.ID" />
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.HoleCode">@Localizer["HOLE CODE"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.HoleCode" type="text" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.HoleCode" class="text-danger">@ViewData["Message"]</span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.ProjectCode">@Localizer["PROJECT CODE"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.ProjectCode" type="text" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.ProjectCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.HoleZoneID">@Localizer["HOLE ZONE"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <select asp-for="Hole.HoleZoneID" id="HoleZoneID" class="form-control" asp-items="ViewBag.HoleZoneID"></select>
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.HoleZoneID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label>@Localizer["AREA"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input type="text" value="" id="HoleArea" class="form-control" readonly />
+                </div>
+                <div class="form-group col-sm-2">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.DrillID" class="control-label">@Localizer["DRILL"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <select asp-for="Hole.DrillID" class="form-control" asp-items="ViewBag.DrillID"></select>
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.DrillID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.DrillProgramID" class="control-label">@Localizer["DRILL PROGRAM"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <select asp-for="Hole.DrillProgramID" class="form-control" asp-items="ViewBag.DrillProgramID"></select>
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.DrillProgramID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.Bench">@Localizer["BENCH"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.Bench" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.Bench" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.HoleDepth">@Localizer["PROJECT DEPTH"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.HoleDepth" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.HoleDepth" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.Azimut">@Localizer["AZIMUT"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.Azimut" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.Azimut" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.Dip">@Localizer["DIP"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.Dip" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.Dip" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.Section">@Localizer["SECTION"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.Section" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.Section" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.ZeroDatum">@Localizer["ZERO DATUM"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.ZeroDatum" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.ZeroDatum" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.HoleStartDate">@Localizer["START DATE"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.HoleStartDate" type="date" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.HoleStartDate" class="text-danger">@ViewData["DateValid"]</span>
+                </div>
+            </div>
+            @*<div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.HoleEndDate">@Localizer["END DATE"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.HoleEndDate" type="date" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.HoleEndDate" class="text-danger"></span>
+                </div>
+            </div>*@
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.HoleStatusID">@Localizer["STATUS"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <select asp-for="Hole.HoleStatusID" class="form-control" asp-items="ViewBag.HoleStatusID"></select>
+                </div>
+                <div class="form-group col-sm-2">
+                    <span asp-validation-for="Hole.HoleStatusID" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-3"></div>
+                <div class="form-group col-sm-3">
+                    <label asp-for="Hole.HoleComment">@Localizer["COMMENT"]</label>
+                </div>
+                <div class="form-group col-sm-4">
+                    <input asp-for="Hole.HoleComment" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                </div>
+            </div>
+            <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <label for="projectCoordinates">@Localizer["PROJECT COORDINATES"]</label>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <input asp-for="Hole.ProjectCoordinatesX" class="form-control" placeholder="X">
+                        <span asp-validation-for="Hole.ProjectCoordinatesX" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <input asp-for="Hole.ProjectCoordinatesY" class="form-control" placeholder="Y">
+                        <span asp-validation-for="Hole.ProjectCoordinatesY" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <input asp-for="Hole.ProjectCoordinatesZ" class="form-control" placeholder="Z">
+                        <span asp-validation-for="Hole.ProjectCoordinatesZ" class="text-danger"></span>
+                    </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <label for="actualCoordinate">@Localizer["ACTUAL COORDINATE"]</label>
+                </div>
+                <div class="form-group col-sm-2">
+                    <input asp-for="Hole.ActualCoordinateX" class="form-control" placeholder="X">
+                    <span asp-validation-for="Hole.ActualCoordinateX" class="text-danger"></span>
+                </div>
+                <div class="form-group col-sm-2">
+                    <input asp-for="Hole.ActualCoordinateY" class="form-control" placeholder="Y">
+                    <span asp-validation-for="Hole.ActualCoordinateY" class="text-danger"></span>
+                </div>
+                <div class="form-group col-sm-2">
+                    <input asp-for="Hole.ActualCoordinateZ" class="form-control" placeholder="Z">
+                    <span asp-validation-for="Hole.ActualCoordinateZ" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-block">@Localizer["SAVE"]</button>
+                </div>
+                <div class="col-sm-2">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-3">
+        <button type="button" id="btnQueryStringBack" class="btn btn-block">@Localizer["BACK"]</button><br /><br />
+    </div>
+</div>
+@section Scripts {
+    <script>
+        var apiBaseUrl = document.location.origin;
+
+        $("#HoleZoneID").bind('change', function () {
+            var HoleZoneID = this.value;
+            if (HoleZoneID == null)
+                return;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("HoleArea").innerHTML = this.responseText
+                    document.getElementById("HoleArea").value = $('#DetailsArea')[0].outerText;
+
+                }
+            };
+            xhttp.open("GET", apiBaseUrl + "/HoleZones/Details?id=" + HoleZoneID, true);
+            xhttp.send();
+
+        });
+        $("#HoleZoneID").trigger('change');
+    </script>
+}
