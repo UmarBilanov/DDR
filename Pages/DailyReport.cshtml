@@ -15,21 +15,24 @@
 
 }
 @section Scripts
-    {
+{
     <script type="text/javascript">
 
-        $("#btnQueryStringBackToHomeIndex").bind("click", function () {
-            var QueryStringLength = window.location.search.length;
-            if (QueryStringLength >= 10) {
-                var url = "/?" + window.location.search.substring(window.location.search.length - 10, window.location.search.length);
-                window.location.href = url;
-            } else {
-                var url = "/";
-                window.location.href = url;
-            }
-        });
+        $("#btnQueryStringBackToHomeIndex").bind("click",
+            function() {
+                var QueryStringLength = window.location.search.length;
+                if (QueryStringLength >= 10) {
+                    var url = "/?" +
+                        window.location.search.substring(window.location.search.length - 10,
+                            window.location.search.length);
+                    window.location.href = url;
+                } else {
+                    var url = "/";
+                    window.location.href = url;
+                }
+            });
 
-        $(document).ready(function (e) {
+        $(document).ready(function(e) {
             var now = new Date();
 
             var day = ("0" + now.getDate()).slice(-2);
@@ -37,8 +40,117 @@
             var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
             $('#TodayDate').val(today);
-            
+
         });
+
+        //document.getElementById('export').addEventListener('click',
+        //    exportPDF);
+
+        //var specialElementHandlers = {
+        //    // element with id of "bypass" - jQuery style selector
+        //    '.no-export': function(element, renderer) {
+        //        // true = "handled elsewhere, bypass text extraction"
+        //        return true;
+        //    }
+        //};
+
+        //function exportPDF() {
+
+        //    var doc = new jsPDF('l', 'pt', 'a4');
+
+        //    //var source = document.getElementById('sample').innerHTML;
+        //    var source = $('#sample')[0];
+
+        //    var margins = {
+        //        top: 10,
+        //        bottom: 10,
+        //        left: 10,
+        //        width: 1600
+        //    };
+
+        //    doc.fromHTML(
+        //        source, // HTML string or DOM elem ref.
+        //        margins.left,
+        //        margins.top, {
+        //            'width': margins.width,
+        //            'elementHandlers': specialElementHandlers
+        //        },
+
+        //        function(dispose) {
+        //            // dispose: object with X, Y of the last line add to the PDF 
+        //            //          this allow the insertion of new lines after html
+        //            doc.save('Test.pdf');
+        //        }, margins);
+        //}
+
+        function tableToJson(table) {
+            var data = [];
+
+            // first row needs to be headers
+            var headers = [];
+            for (var i=0; i<table.rows[0].cells.length; i++) {
+                headers[i] = table.rows[0].cells[i].innerHTML.replace(/ /gi,'');
+            }
+            data.push(headers);
+            // go through cells
+            for (var i=1; i<table.rows.length; i++) {
+
+                var tableRow = table.rows[i];
+                var rowData = {};
+
+                for (var j=0; j<tableRow.cells.length; j++) {
+
+                    rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+
+                }
+
+                data.push(rowData);
+            }       
+
+            return data;
+        }
+
+        function callme(){
+            var table = tableToJson($('#table-id').get(0));
+            var doc = new jsPDF('l','pt','a4',true);
+
+            doc.setFont("Times New Roman");
+            doc.setFontSize(9);
+
+
+            $.each(table, function(i, row){
+                $.each(row, function(j,cell){
+                    if(j=="Area" | j==4 && j=="Project Depth" | j==9){
+                        doc.cell(1,8,100,16,cell,i);	
+                    }
+                    else if(j=="Drill Program" | j==0 && j=="Comment" | j==10){
+                        doc.cell(1,8,150,16,cell,i);
+                    }
+                    else{
+                        doc.cell(1,8,70,16,cell,i);
+                    }
+	
+                });
+            });
+
+            doc.save('NewReport.pdf');
+        }
+
+
+        //var doc = new jsPDF();
+        //var specialElementHandlers = {
+        //    '.editor': function (element, renderer) {
+        //        return true;
+        //    }
+        //};
+
+        //$('.save').click(function () {
+        //    doc.fromHTML($('.sample').html(), 15, 15, {
+        //        'width': 170,
+        //        'elementHandlers': specialElementHandlers
+        //    });
+        //    doc.save('sample-file.pdf');
+        //});
 
 
     </script>
@@ -53,13 +165,15 @@
                         <label for="ReportDate">@Localizer["REPORT DATE"]</label>
                     </div>
                     <div class="col-sm-3">
-                        <input asp-for="ReportDate" type="date" id="TodayDate" value="@DateTime.Now.ToString();" class="form-control report-date__input">
+                        <input asp-for="ReportDate" type="date" id="TodayDate" value="DateTime.Now.ToString();" class="form-control report-date__input">
                     </div>
                     <div class="col-sm-3">
                         <button type="submit" value="Filter" id="submit" class="btn btn-block">@Localizer["REPORT"]</button>
                     </div>
                     <div class="col-sm-3">
-                        <input asp-for="culture" type="hidden" class="form-control">
+                        <button class="btn" onclick="callme()">Save</button>
+                        @*<a href="javascript:callme()">Download PDF</a>*@
+                        @*<a href="javascript:saveDiv()">Download PDF</a>*@
                     </div>
                 </div>
             </div>
@@ -68,92 +182,62 @@
         <div class="col-sm-3 tabs">
             <button type="button" id="btnQueryStringBackToHomeIndex" class="btn btn-block">@Localizer["BACK"]</button><br />
         </div>
-        <div class="col-sm-12">
-            <div class="panel panel-default">
-                <table class="table table-bordered my-table">
-                    <thead>
-                        <tr class="active">
-                            <th>@Localizer["Drill Program"]</th>
-                            <th>@Localizer["Drill"]</th>
-                            <th>@Localizer["Hole"]</th>
-                            <th>@Localizer["Bench"]</th>
-                            <th>@Localizer["Area"]</th>
-                            <th>@Localizer["D/S"]</th>
-                            <th>@Localizer["N/S"]</th>
-                            <th>@Localizer["Total"]</th>
-                            <th>@Localizer["Casing"]</th>
-                            <th>@Localizer["Project Depth"]</th>
-                            <th>@Localizer["Comment"]</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item0 in Model.DrillProgram)
-                        {
+        <div class='sample' id='sample'>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <table class="table table-bordered my-table" id="table-id">
+                        <thead>
                             <tr class="active">
-                                <td colspan="11">@Html.DisplayFor(modelItem => item0.Name)</td>
-                                @*<td>
-                                    <strong>
-                                        @(
-                                                            @Model.CreateDailyReport
-                                                            .Where(w => w.Hole.DrillProgram.Name == item0.Name).Sum(i => i.HoleDepthToNight)
-                                        )
-                                    </strong>
-                                </td>
-                                <td colspan="3"></td>*@
+                                <th>@Localizer["Drill Program"]</th>
+                                <th>@Localizer["Drill"]</th>
+                                <th>@Localizer["Hole"]</th>
+                                <th>@Localizer["Bench"]</th>
+                                <th>@Localizer["Area"]</th>
+                                <th>@Localizer["D/S"]</th>
+                                <th>@Localizer["N/S"]</th>
+                                <th>@Localizer["Total"]</th>
+                                <th>@Localizer["Casing"]</th>
+                                <th>@Localizer["Project Depth"]</th>
+                                <th>@Localizer["Comment"]</th>
                             </tr>
-                            @foreach (var item in Model.CreateDailyReport)
+                        </thead>
+                        <tbody>
+                            @foreach (var item0 in Model.DrillProgram)
                             {
-                                @if (item0.Name == item.Hole.DrillProgram.Name)
+                                <tr>
+                                    <td class="active">@Html.DisplayFor(modelItem => item0.Name)</td>
+                                    <td colspan="10"></td>
+                                </tr>
+                                @foreach (var item in Model.CreateDailyReport)
                                 {
-                                    <tr>
-                                        <td></td>
-                                        <td>@Html.DisplayFor(modelItem => item.Hole.Drill.DrillCode)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Hole.HoleCode)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Hole.Bench)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Hole.HoleZone.Area.Name)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.MetersDrilledDay)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.MetersDrilledNight)</td>
-                                        <td>
-                                            <strong>
-                                                @(@item.MetersDrilledDay + @item.MetersDrilledNight)
-                                            </strong>
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.CasingToNight)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Hole.HoleDepth)</td>
-                                        <td>
-                                            @if (item.CommentDay != null)
-                                            {<strong>D/S</strong>
-                                                @Html.DisplayFor(modelItem => item.CommentDay)
-                                                ;
-                                            }
-                                            @if (item.CommentNight != null)
-                                            {<strong>N/S</strong>
-                                                @Html.DisplayFor(modelItem => item.CommentNight)
-                                                ;
-                                            }
-                                        </td>
-                                    </tr>
+                                    @if (item0.Name == item.Hole.DrillProgram.Name)
+                                    {
+                                        <tr>
+                                            <td></td>
+                                            <td>@Html.DisplayFor(modelItem => item.Hole.Drill.DrillCode)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Hole.HoleCode)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Hole.Bench)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Hole.HoleZone.Area.Name)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.MetersDrilledDay)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.MetersDrilledNight)</td>
+                                            <td class="active">@(@item.MetersDrilledDay + @item.MetersDrilledNight)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.CasingToNight)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Hole.HoleDepth)</td>
+                                            <td>@if (item.CommentDay != null){<strong>D/S </strong>@Html.DisplayFor(modelItem => item.CommentDay);}@if (item.CommentNight != null){<strong>. N/S </strong>@Html.DisplayFor(modelItem => item.CommentNight);}</td>
+                                        </tr>
+                                    }
                                 }
                             }
-                        }
-                        <tr class="active">
-                            <td colspan="7">
-                                <strong>
-                                    @Localizer["GENERAL TOTAL"]
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    @(
-                                        @Model.CreateDailyReport.Sum(i => i.MetersDrilledDay + i.MetersDrilledNight)
-                                      )
-                                </strong>
-                            </td>
-                            <td colspan="3"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                            <tr class="active">
+                                <td colspan="7">@Localizer["GENERAL TOTAL"]</td>
+                                <td>@(@Model.CreateDailyReport.Sum(i => i.MetersDrilledDay + i.MetersDrilledNight))</td>
+                                <td colspan="3"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        <div class="editor"></div>
     </form>
 </div>

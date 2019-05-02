@@ -55,7 +55,7 @@ using DiamondDrillingReport;
             WriteLiteral("<hr />\r\n<div class=\"container\">\r\n    <div class=\"col-sm-9\">\r\n        <h3>\r\n            The equipment is successfully created.\r\n        </h3>\r\n    </div>\r\n\r\n    <div class=\"col-sm-3\">\r\n        ");
             EndContext();
             BeginContext(290, 90, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fabb99f9a7a54d31bab09fc4eab704f8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cc72ae0223de4fdfba8ef98939e99d88", async() => {
                 BeginContext(311, 65, true);
                 WriteLiteral("<button type=\"button\" class=\"btn btn-block\">BACK TO HOME</button>");
                 EndContext();

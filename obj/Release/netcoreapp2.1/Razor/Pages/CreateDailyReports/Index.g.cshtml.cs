@@ -143,12 +143,12 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("\r\n<hr />\r\n<div class=\"container\">\r\n    <div class=\"col-sm-9\">\r\n        <hr />\r\n        ");
             EndContext();
             BeginContext(2265, 810, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "25b5d78a1fe64f1baeaeb861cd28ba33", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "df64442f0b9b47268e71a849e7b84625", async() => {
                 BeginContext(2303, 54, true);
                 WriteLiteral("\r\n            <div class=\"col-sm-3\">\r\n                ");
                 EndContext();
                 BeginContext(2357, 109, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "aff461fc81164425bcd7cbf85e6eeaca", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "77514a1ed74443dfb16e92f855e7de56", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -177,12 +177,12 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 WriteLiteral("\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n                ");
                 EndContext();
                 BeginContext(2540, 166, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fea7faecb77345a0be2dea58acd46a23", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3f61cedf38484715ad0a76350112adfd", async() => {
                     BeginContext(2614, 22, true);
                     WriteLiteral("\r\n                    ");
                     EndContext();
                     BeginContext(2636, 43, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0eeaf04358234075bb5da48aec08d5bc", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c2d197c23c3a4378a84351f4ba0f6e57", async() => {
                         BeginContext(2654, 16, false);
 #line 79 "C:\Users\Askartec\Documents\diamonddrillingreport\Diamond_drilling_report\DiamondDrillingReport\Pages\CreateDailyReports\Index.cshtml"
                                 Write(Localizer["ALL"]);
@@ -517,7 +517,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_SelectTagHelper.Items = Model.Holes;
             WriteLiteral("                </td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(6476, 91, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c923a7e5dbbf45adb7ac7f6738e67fa9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "181a112003534bcfb27f30485010ddb0", async() => {
                 BeginContext(6546, 17, false);
 #line 177 "C:\Users\Askartec\Documents\diamonddrillingreport\Diamond_drilling_report\DiamondDrillingReport\Pages\CreateDailyReports\Index.cshtml"
                                                                                     Write(Localizer["Edit"]);
@@ -557,7 +557,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_SelectTagHelper.Items = Model.Holes;
             WriteLiteral(" | ");
             EndContext();
             BeginContext(6570, 97, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f3ac9ddd731b419f99f3e7b46fdce2e7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "15021294d6224921b119a6271b18179f", async() => {
                 BeginContext(6644, 19, false);
 #line 177 "C:\Users\Askartec\Documents\diamonddrillingreport\Diamond_drilling_report\DiamondDrillingReport\Pages\CreateDailyReports\Index.cshtml"
                                                                                                                                                                                       Write(Localizer["Delete"]);

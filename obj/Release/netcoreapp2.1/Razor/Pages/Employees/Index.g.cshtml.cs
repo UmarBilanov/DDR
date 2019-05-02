@@ -275,7 +275,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral("                            </td>\r\n                            <td>\r\n                                ");
             EndContext();
             BeginContext(3519, 91, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "157cee5b9aa5480cb495e9a5862e3029", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dc2659d79c3444cf83e3300c2e98af2b", async() => {
                 BeginContext(3589, 17, false);
 #line 87 "C:\Users\Askartec\Documents\diamonddrillingreport\Diamond_drilling_report\DiamondDrillingReport\Pages\Employees\Index.cshtml"
                                                                                                 Write(Localizer["Edit"]);
@@ -315,7 +315,7 @@ using Microsoft.AspNetCore.Mvc.Localization;
             WriteLiteral(" |\r\n                                ");
             EndContext();
             BeginContext(3646, 97, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "03fe0611c7264c8a810a2bc35645ae0f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "59b1e34d50494b6db42f5ffe99c125e9", async() => {
                 BeginContext(3720, 19, false);
 #line 88 "C:\Users\Askartec\Documents\diamonddrillingreport\Diamond_drilling_report\DiamondDrillingReport\Pages\Employees\Index.cshtml"
                                                                                                     Write(Localizer["Delete"]);
